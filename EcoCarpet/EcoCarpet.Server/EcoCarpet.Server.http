@@ -1,0 +1,6 @@
+@EcoCarpet.Server_HostAddress = http://localhost:5255
+
+GET {{EcoCarpet.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
