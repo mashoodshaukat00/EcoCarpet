@@ -1,7 +1,7 @@
 # Steps to Enable Team Collaboration
 1. Include Migration Files in Version Control:
 
-- When you run `Add-Migration InitiateCreate`, Entity Framework creates migration files (e.g., `InitialCreate.cs`) in a `Migrations` folder.
+- When you run `Add-Migration`, Entity Framework creates migration files (e.g., `InitialCreate.cs`) in a `Migrations` folder.
 - Ensure this folder is committed to your Git repository so others can access the same migration history.
   
 2. **Team Member Workflow to Create Database:** Once a team member clones the repository, they can use the following steps to create or update their local database:
@@ -11,7 +11,7 @@
 **Run:**
 bash
 
-`dotnet ef database update`
+`update-database`
 - This command applies all migrations and creates the database (EcoCarpetDB) and tables on their local SQL Server instance.
 # Database Connection String:
 
