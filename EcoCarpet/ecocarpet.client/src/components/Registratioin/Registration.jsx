@@ -5,6 +5,11 @@ const RegisterForm = () => {
         FirstName: '',
         LastName: '',
         Email: '',
+        Address: '',
+        City: '',
+        Country: '',
+        PostalCode: '',
+        PhoneNumber:'',
         PasswordHash: '',
     });
 
@@ -41,8 +46,7 @@ const RegisterForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                type="text"
+            <input type="text"
                 name="FirstName"
                 placeholder="First Name"
                 value={formData.FirstName}
@@ -57,11 +61,52 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 required
             />
+            
             <input
                 type="email"
                 name="Email"
                 placeholder="Email"
                 value={formData.Email}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="text"
+                name="Address"
+                placeholder="Address"
+                value={formData.Address}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="text"
+                name="City"
+                placeholder="City"
+                value={formData.City}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="text"
+                name="Country"
+                placeholder="Country"
+                value={formData.Country}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="text"
+                name="PostalCode"
+                placeholder="PostalCode"
+                value={formData.PostalCode}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="tel" // Use type="tel" for phone numbers
+                name="PhoneNumber"
+                placeholder="Phone Number"
+                value={formData.PhoneNumber}
                 onChange={handleChange}
                 required
             />
