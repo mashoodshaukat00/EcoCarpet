@@ -22,7 +22,7 @@ const RegisterForm = () => {
         e.preventDefault();
         console.log('Form data before submission:', formData);
         try {
-            const response = await fetch('https://localhost:7036/api/Customers/Register', {  // Change URL as needed
+            const response = await fetch('https://localhost:7036/api/Users/Register', {  // Change URL as needed
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const RegisterForm = () => {
                 required
             />
             <input
-                type="tel" // Use type="tel" for phone numbers
+                type="tel"
                 name="PhoneNumber"
                 placeholder="Phone Number"
                 pattern="[0-9]{8}"
