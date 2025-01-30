@@ -9,5 +9,6 @@ namespace EcoCarpet.Server.Data
 
         // Define your tables here
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Carpet> Carpets { get; set; }
     }
 }
