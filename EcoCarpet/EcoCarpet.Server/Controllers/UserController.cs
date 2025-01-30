@@ -10,18 +10,18 @@ namespace EcoCarpet.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public CustomersController(AppDbContext context)
+        public UsersController(AppDbContext context)
         {
             _context = context;
         }
 
-        // POST: api/Customers/Register
+        // POST: api/Users/Register
         [HttpPost("Register")]
-        public async Task<ActionResult<Customer>> Register([FromBody] Customer customer)
+        public async Task<ActionResult<User>> Register([FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
@@ -29,62 +29,62 @@ namespace EcoCarpet.Server.Controllers
             }
 
             // Check if email already exists
-            var existingCustomer = await _context.Customers
-                .FirstOrDefaultAsync(c => c.Email == customer.Email);
-            if (existingCustomer != null)
+            var existingUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (existingUser != null)
             {
                 return BadRequest("Email is already in use.");
             }
 
             // Hash the password before saving
-            customer.PasswordHash = HashPassword(customer.PasswordHash);
+            user.PasswordHash = HashPassword(user.PasswordHash);
 
-            // Save the new customer to the database
-            _context.Customers.Add(customer);
+            // Save the new user to the database
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Return created customer
-            return CreatedAtAction(nameof(GetCustomer), new { id = customer.CustomerID }, customer);
+            // Return created user
+            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, user);
         }
 
-        // POST: api/Customers/Login
+        // POST: api/Users/Login
         [HttpPost("Login")]
-        public async Task<ActionResult<Customer>> Login([FromBody] LoginModel loginModel)
+        public async Task<ActionResult<User>> Login([FromBody] LoginModel loginModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var customer = await _context.Customers
+            var user = await _context.Users
                 .FirstOrDefaultAsync(c => c.Email == loginModel.Email);
 
-            if (customer == null)
+            if (user == null)
             {
                 return Unauthorized("Invalid email or password.");
             }
 
             // Validate password
-            if (customer.PasswordHash != HashPassword(loginModel.Password))
+            if (user.PasswordHash != HashPassword(loginModel.Password))
             {
                 return Unauthorized("Invalid email or password.");
             }
 
-            return Ok(new { message = "Login successful", customer });
+            return Ok(new { message = "Login successful", user });
         }
 
-        // GET: api/Customers/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
-            if (customer == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return user;
         }
 
         // Helper method to hash passwords

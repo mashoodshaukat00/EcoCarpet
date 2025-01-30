@@ -2,10 +2,10 @@
 
 namespace EcoCarpet.Server.Models
 {
-    public class Customer
+    public class User
     {
         [Key]
-        public int CustomerID { get; set; }
+        public int UserID { get; set; }
 
         [Required]
         [MaxLength(100)]

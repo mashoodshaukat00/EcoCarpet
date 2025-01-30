@@ -16,7 +16,7 @@ const LoginForm = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://localhost:7036/api/Customers/Login', {  // Change URL as needed
+            const response = await fetch('https://localhost:7036/api/Users/Login', {  // Change URL as needed
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
