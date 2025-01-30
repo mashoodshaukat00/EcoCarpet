@@ -95,9 +95,11 @@ const RegisterForm = () => {
                 required
             />
             <input
-                type="text"
+                type="tel"
                 name="PostalCode"
                 placeholder="PostalCode"
+                pattern="[0-9]{4}"
+                title="Four digit postal code"
                 value={formData.PostalCode}
                 onChange={handleChange}
                 required
@@ -106,6 +108,8 @@ const RegisterForm = () => {
                 type="tel" // Use type="tel" for phone numbers
                 name="PhoneNumber"
                 placeholder="Phone Number"
+                pattern="[0-9]{8}"
+                title="Eight digit phone number"
                 value={formData.PhoneNumber}
                 onChange={handleChange}
                 required
