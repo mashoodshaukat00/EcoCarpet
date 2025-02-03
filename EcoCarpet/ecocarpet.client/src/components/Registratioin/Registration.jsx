@@ -22,7 +22,7 @@ const RegisterForm = () => {
         e.preventDefault();
         console.log('Form data before submission:', formData);
         try {
-            const response = await fetch('https://localhost:7036/api/Users/Register', {  // Change URL as needed
+            const response = await fetch('https://localhost:7036/api/Customers/Register', {  // Change URL as needed
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,21 +95,17 @@ const RegisterForm = () => {
                 required
             />
             <input
-                type="tel"
+                type="text"
                 name="PostalCode"
                 placeholder="PostalCode"
-                pattern="[0-9]{4}"
-                title="Four digit postal code"
                 value={formData.PostalCode}
                 onChange={handleChange}
                 required
             />
             <input
-                type="tel"
+                type="tel" // Use type="tel" for phone numbers
                 name="PhoneNumber"
                 placeholder="Phone Number"
-                pattern="[0-9]{8}"
-                title="Eight digit phone number"
                 value={formData.PhoneNumber}
                 onChange={handleChange}
                 required
