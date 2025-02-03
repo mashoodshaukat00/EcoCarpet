@@ -71,6 +71,12 @@ namespace EcoCarpet.Server.Controllers
 
             return Ok(new { message = $"{carpets.Count} carpets seeded successfully." });
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Carpet>>> GetCarpets()
+        {
+            return await _context.Carpets.ToListAsync();
+        }
     }
 }
 

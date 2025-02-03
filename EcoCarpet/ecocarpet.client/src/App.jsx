@@ -1,6 +1,7 @@
 import './App.css';
 import RegisterForm from './components/Registratioin/Registration';
 import LoginForm from './components/Login/Login';
+import CarpetList from './components/ProductList/ProductList';
 
 function App() {
     
@@ -10,7 +11,8 @@ function App() {
             <p>This component demonstrates fetching data from the server.</p>
            
             <RegisterForm />
-            <LoginForm/>
+            <LoginForm />
+            <CarpetList />
         </div>
     );
     
