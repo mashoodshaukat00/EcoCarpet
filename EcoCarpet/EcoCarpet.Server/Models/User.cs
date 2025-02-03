@@ -2,10 +2,10 @@
 
 namespace EcoCarpet.Server.Models
 {
-    public class Customer
+    public class User
     {
         [Key]
-        public int CustomerID { get; set; }
+        public int UserID { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -29,8 +29,8 @@ namespace EcoCarpet.Server.Models
         public string City { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        [RegularExpression(@"^\d{4}$", ErrorMessage = "Invalid Norwegian postal code format.")] // Regex for Norway
+        [MaxLength(4)]
+        
         public string Postalcode { get; set; }
 
         [Required]
@@ -38,7 +38,7 @@ namespace EcoCarpet.Server.Models
         public string Country { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(8)]
         [Phone]
         public string PhoneNumber { get; set; }
 
