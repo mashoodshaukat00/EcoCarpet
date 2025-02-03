@@ -7,7 +7,6 @@ namespace EcoCarpet.Server.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        // Define your tables here
         public DbSet<User> Users { get; set; }
 
         // Override the onModelCreating method to configure fluet API
@@ -31,5 +30,6 @@ namespace EcoCarpet.Server.Data
                       .HasColumnName("UserID");
             });
         }
+        public DbSet<Carpet> Carpets { get; set; }
     }
 }
