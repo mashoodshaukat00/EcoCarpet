@@ -1,5 +1,4 @@
 import './App.css';
-import RegisterForm from './components/Registratioin/Registration';
 import LoginForm from './components/Login/Login';
 import ProductList from './components/ProductList/ProductList';
 import Nav from './components/Nav/Nav';
