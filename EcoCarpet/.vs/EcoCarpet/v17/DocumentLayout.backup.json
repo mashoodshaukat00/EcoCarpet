@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{58779503-A514-4B6A-A16A-0DEB6465A06F}|EcoCarpet.Server\\EcoCarpet.Server.csproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.server\\controllers\\usersubscriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58779503-A514-4B6A-A16A-0DEB6465A06F}|EcoCarpet.Server\\EcoCarpet.Server.csproj|solutionrelative:ecocarpet.server\\controllers\\usersubscriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.client\\src\\components\\subscriptions\\subscriptionpage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|solutionrelative:ecocarpet.client\\src\\components\\subscriptions\\subscriptionpage.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.client\\src\\components\\login\\login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|solutionrelative:ecocarpet.client\\src\\components\\login\\login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58779503-A514-4B6A-A16A-0DEB6465A06F}|EcoCarpet.Server\\EcoCarpet.Server.csproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58779503-A514-4B6A-A16A-0DEB6465A06F}|EcoCarpet.Server\\EcoCarpet.Server.csproj|solutionrelative:ecocarpet.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|solutionrelative:ecocarpet.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.client\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|solutionrelative:ecocarpet.client\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.client\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|solutionrelative:ecocarpet.client\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|c:\\users\\glasspaper\\desktop\\ny mappe\\ecocarpet\\ecocarpet.client\\src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{568EB390-2C8B-4C88-8972-F6BDC2DC3655}|ecocarpet.client\\ecocarpet.client.esproj|solutionrelative:ecocarpet.client\\src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserSubscriptionController.cs",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\EcoCarpet.Server\\Controllers\\UserSubscriptionController.cs",
+              "RelativeDocumentMoniker": "EcoCarpet.Server\\Controllers\\UserSubscriptionController.cs",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\EcoCarpet.Server\\Controllers\\UserSubscriptionController.cs",
+              "RelativeToolTip": "EcoCarpet.Server\\Controllers\\UserSubscriptionController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAiwCIAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T13:13:19.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\EcoCarpet.Server\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "EcoCarpet.Server\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\EcoCarpet.Server\\Controllers\\UserController.cs",
+              "RelativeToolTip": "EcoCarpet.Server\\Controllers\\UserController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAAAEsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T12:50:46.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "index.css",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\index.css",
+              "RelativeDocumentMoniker": "ecocarpet.client\\src\\index.css",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\index.css",
+              "RelativeToolTip": "ecocarpet.client\\src\\index.css",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAEYAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-04T09:28:37.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.css",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\App.css",
+              "RelativeDocumentMoniker": "ecocarpet.client\\src\\App.css",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\App.css",
+              "RelativeToolTip": "ecocarpet.client\\src\\App.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-04T09:26:33.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "main.jsx",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\main.jsx",
+              "RelativeDocumentMoniker": "ecocarpet.client\\src\\main.jsx",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\main.jsx",
+              "RelativeToolTip": "ecocarpet.client\\src\\main.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-04T08:45:30.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.jsx",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\components\\Login\\Login.jsx",
+              "RelativeDocumentMoniker": "ecocarpet.client\\src\\components\\Login\\Login.jsx",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\components\\Login\\Login.jsx",
+              "RelativeToolTip": "ecocarpet.client\\src\\components\\Login\\Login.jsx",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-04T08:42:27.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.jsx",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\App.jsx",
+              "RelativeDocumentMoniker": "ecocarpet.client\\src\\App.jsx",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\App.jsx",
+              "RelativeToolTip": "ecocarpet.client\\src\\App.jsx",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-04T08:13:02.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SubscriptionPage.jsx",
+              "DocumentMoniker": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\components\\Subscriptions\\SubscriptionPage.jsx",
+              "RelativeDocumentMoniker": "ecocarpet.client\\src\\components\\Subscriptions\\SubscriptionPage.jsx",
+              "ToolTip": "C:\\Users\\glasspaper\\Desktop\\Ny mappe\\EcoCarpet\\ecocarpet.client\\src\\components\\Subscriptions\\SubscriptionPage.jsx",
+              "RelativeToolTip": "ecocarpet.client\\src\\components\\Subscriptions\\SubscriptionPage.jsx",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAcAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-04T07:26:13.55Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

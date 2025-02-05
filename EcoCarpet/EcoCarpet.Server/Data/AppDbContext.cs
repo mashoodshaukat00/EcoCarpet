@@ -8,6 +8,9 @@ namespace EcoCarpet.Server.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<UserSubscription> UserSubscriptions { get; set; }
+
 
         // Override the onModelCreating method to configure fluet API
         // Configure Fluent API

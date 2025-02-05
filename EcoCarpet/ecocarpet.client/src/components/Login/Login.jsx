@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 
 const LoginForm = () => {
     const [loginData, setLoginData] = useState({
@@ -23,14 +23,23 @@ const LoginForm = () => {
                 },
                 body: JSON.stringify(loginData),
             });
-            console.log('response:', response)
 
-            if (response.ok) {
-                alert('Login successful!');
-                // Perform login actions such as storing token, user data, etc.
-            } else {
-                alert('Invalid credentials');
+
+            if (!response.ok) {
+                throw new Error('Innlogging feilet');
             }
+
+            const data = await response.json(); // Henter hele responsobjektet
+
+            console.log("Login response:", data); // Sjekk hva backend returnerer
+
+            if (data.user && data.user.userID) {  // Riktig vei å hente userID
+                localStorage.setItem("userId", data.user.userID.toString()); // Lagre userID som string
+                alert("Innlogging vellykket!");
+            } else {
+                alert("Kunne ikke hente bruker-ID fra serveren.");
+            }
+
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             alert('Failed to login. Please try again later.');
