@@ -5,7 +5,6 @@ const SubscriptionPage = () => {
     const [subscriptions, setSubscriptions] = useState([]);
     const [selectedPlan, setSelectedPlan] = useState(null);
 
-    // Hent bruker-ID fra localStorage
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
@@ -18,7 +17,7 @@ const SubscriptionPage = () => {
         setSelectedPlan(plan);
 
         if (!userId) {
-            alert("Du må være logget inn for å velge et abonnement!");
+            alert("You need to be logged in in order to choose a subscription!");
             return;
         }
 
@@ -37,18 +36,18 @@ const SubscriptionPage = () => {
                 }
             );
 
-            console.log("API Response:", response); // Debugging for å sjekke respons
+            console.log("API Response:", response);
 
             if (response.status === 201) {
-                console.log(`Du har valgt: ${plan.planName}`);
-                alert(`Abonnement lagret: ${plan.planName}`);
+                console.log(`You selected: ${plan.planName}`);
+                alert(`subscription selected: ${plan.planName}`);
             } else {
-                console.error("Uventet respons fra serveren:", response);
-                alert("Kunne ikke lagre abonnement. Prøv igjen.");
+                console.error("unexpected response from server:", response);
+                alert("cannot select subscription, please try again");
             }
         } catch (error) {
-            console.error("Feil ved lagring av abonnement:", error);
-            alert("Kunne ikke lagre abonnement. Prøv igjen.");
+            console.error("Failed to save the subscription:", error);
+            alert("cannot save subscription, please try again");
         }
     };
 

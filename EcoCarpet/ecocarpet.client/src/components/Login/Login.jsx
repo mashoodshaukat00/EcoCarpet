@@ -26,18 +26,18 @@ const LoginForm = () => {
 
 
             if (!response.ok) {
-                throw new Error('Innlogging feilet');
+                throw new Error('Login failed');
             }
 
-            const data = await response.json(); // Henter hele responsobjektet
+            const data = await response.json();
 
-            console.log("Login response:", data); // Sjekk hva backend returnerer
+            console.log("Login response:", data);
 
-            if (data.user && data.user.userID) {  // Riktig vei å hente userID
-                localStorage.setItem("userId", data.user.userID.toString()); // Lagre userID som string
-                alert("Innlogging vellykket!");
+            if (data.user && data.user.userID) { 
+                localStorage.setItem("userId", data.user.userID.toString());
+                alert("Logged in successfully!");
             } else {
-                alert("Kunne ikke hente bruker-ID fra serveren.");
+                alert("cannot fetch userId from the server.");
             }
 
         } catch (error) {
