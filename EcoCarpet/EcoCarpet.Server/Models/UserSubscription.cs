@@ -9,11 +9,11 @@ namespace EcoCarpet.Server.Models
         public int UserSubscriptionID { get; set; }
 
         [Required]
-        public int UserID { get; set; } // FK - User som har abonnementet
+        public int UserID { get; set; } // FK - User who have this subscription
 
         [Required]
         [ForeignKey("Subscription")]
-        public int SubscriptionID { get; set; } // FK - Hvilket abonnement
+        public int SubscriptionID { get; set; } // FK - which subscription
 
         [Required]
         public DateTime StartDate { get; set; } = DateTime.UtcNow;
@@ -28,6 +28,6 @@ namespace EcoCarpet.Server.Models
 
         public int CurrentCarpets { get; set; } = 0;
 
-        public virtual Subscription? Subscription { get; set; } // Relasjon til Subscription
+        public virtual Subscription? Subscription { get; set; } // relation to Subscription
     }
 }
