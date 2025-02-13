@@ -1,28 +1,39 @@
 import './App.css';
-
-import RegisterForm from './components/Registratioin/Registration';
 import LoginForm from './components/Login/Login';
-import CarpetList from './components/ProductList/ProductList';
+import ProductList from './components/ProductList/ProductList';
+import Nav from './components/Nav/Nav';
+import Footer from './components/Footer/Footer';
+import RegistrationForm from './components/Registratioin/RegistrationForm';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './components/Home/Home';
+import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 
 function App() {
-   
-    return (
-        <div>
-            <h1 className='text-3xl font-bold underline text-green-400'>Registration</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-
-            <RegisterForm />
-
-            
-                <LoginForm />
-           
-                <SubscriptionPage />
-           
-
-            <CarpetList />
-        </div>
-    );
+    
+    return (    
+        <BrowserRouter>
+            <div className="flex flex-col min-h-screen">
+               
+                    <Nav/>
+            <main className="flex-grow bg-gray-100 p-4">
+                
+                    <Routes>
+                       
+                            <Route path= "/"element={<Home/> } />
+                            <Route path="/login" element={<LoginForm />} />
+                            <Route path="/signup" element={<RegistrationForm />} />
+                            <Route path="/products" element={<ProductList />} />
+                            <Route path="/subscriptions" element={<SubscriptionPage />} />
+                            <Route path="*" element={<NoPage />} />
+                        
+                    </Routes>
+                
+            </main>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    );   
 }
 
 export default App;
