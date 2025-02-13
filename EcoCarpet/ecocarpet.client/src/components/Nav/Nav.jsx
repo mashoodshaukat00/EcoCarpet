@@ -12,6 +12,7 @@ const Nav = () => {
                     <li><Link to="/login" className="hover:underline">Login</Link></li>
                     <li><Link to="/signup" className="hover:underline">Signup</Link></li>
                     <li><Link to="/products" className="hover:underline">Products</Link></li>
+                    <li><Link to="/subscriptions" className="hover:underline">Subscriptions</Link></li>
                     <li><Link to="*" className="hover:underline">About us</Link></li>                    
                 </ul>
             </nav>                   

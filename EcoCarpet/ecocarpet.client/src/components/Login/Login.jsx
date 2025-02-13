@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 
 const LoginForm = () => {
     const [loginData, setLoginData] = useState({
@@ -23,14 +23,23 @@ const LoginForm = () => {
                 },
                 body: JSON.stringify(loginData),
             });
-            console.log('response:', response)
 
-            if (response.ok) {
-                alert('Login successful!');
-                // Perform login actions such as storing token, user data, etc.
-            } else {
-                alert('Invalid credentials');
+
+            if (!response.ok) {
+                throw new Error('Login failed');
             }
+
+            const data = await response.json();
+
+            console.log("Login response:", data);
+
+            if (data.user && data.user.userID) { 
+                localStorage.setItem("userId", data.user.userID.toString());
+                alert("Logged in successfully!");
+            } else {
+                alert("cannot fetch userId from the server.");
+            }
+
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             alert('Failed to login. Please try again later.');
