@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+/EcoCarpet/EcoCarpet.Server/appsettings.json
