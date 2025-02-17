@@ -1,6 +1,6 @@
 import './App.css';
 import LoginForm from './components/Login/Login';
-import ProductList from './components/ProductList/ProductList';
+import CarpetList from './components/ProductList/CarpetList';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
 import RegistrationForm from './components/Registratioin/RegistrationForm';
@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home';
 import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
+import CarpetDetails from './components/ProductList/CarpetDetails.jsx';
 
 function App() {
     
@@ -23,9 +24,10 @@ function App() {
                             <Route path= "/"element={<Home/> } />
                             <Route path="/login" element={<LoginForm />} />
                             <Route path="/signup" element={<RegistrationForm />} />
-                            <Route path="/products" element={<ProductList />} />
+                            <Route path="/products" element={<CarpetList />} />
                             <Route path="/subscriptions" element={<SubscriptionPage />} />
                             <Route path="*" element={<NoPage />} />
+                            <Route path="/products/:id" element={<CarpetDetails />} /> 
                         
                     </Routes>
                 

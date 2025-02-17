@@ -66,7 +66,7 @@ namespace EcoCarpet.Server.Controllers
             new Carpet { Name = "Frieze Shag Rug", Material = "Polyester", Dimensions = "6x9 ft", Color = "Charcoal", Descriptions = "Thick, textured pile, adds warmth.", AvailableStock = 7, Status = "Available", AddedDate = DateTime.Now },
             };
 
-             _context.Carpets.AddRange(carpets);
+            _context.Carpets.AddRange(carpets);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = $"{carpets.Count} carpets seeded successfully." });
@@ -77,6 +77,44 @@ namespace EcoCarpet.Server.Controllers
         {
             return await _context.Carpets.ToListAsync();
         }
+
+        // ✅ Get Carpets with Filtering
+        [HttpGet("filter")]
+        public async Task<ActionResult<IEnumerable<Carpet>>> GetFilteredCarpets(
+            [FromQuery] string? material,
+            [FromQuery] string? color,
+            [FromQuery] string? dimensions,
+            [FromQuery] string? status)
+        {
+            var query = _context.Carpets.AsQueryable();
+
+            if (!string.IsNullOrEmpty(material))
+                query = query.Where(c => c.Material == material);
+
+            if (!string.IsNullOrEmpty(color))
+                query = query.Where(c => c.Color == color);
+
+            if (!string.IsNullOrEmpty(dimensions))
+                query = query.Where(c => c.Dimensions == dimensions);
+
+            if (!string.IsNullOrEmpty(status))
+                query = query.Where(c => c.Status == status);
+
+            var result = await query.ToListAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Carpet>> GetCarpet(int id)
+        {
+            var carpet = await _context.Carpets.FindAsync(id);
+            if (carpet == null)
+            {
+                return NotFound();
+            }
+            return Ok(carpet);
+        }
+
     }
 }
 
