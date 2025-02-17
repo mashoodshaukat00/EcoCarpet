@@ -8,31 +8,35 @@ namespace EcoCarpet.Server.Models
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         
         [Required]
         [MaxLength(100)]
-        public string Material { get; set; }
+        public string? Material { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Dimensions { get; set; }
+        public string? Dimensions { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Descriptions { get; set; }
+        public string? Descriptions { get; set; }
         [Required]
         [MaxLength(100)]
-        public string Color { get; set; }
+        public string? Color { get; set; }
         [Required]
         [MaxLength(100)]
         public int AvailableStock { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
          public DateTime AddedDate { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string? ImgName { get; set; }
     }
 }
