@@ -19,11 +19,14 @@ const RegistrationForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    // environment variable
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form data before submission:', formData);
         try {
-            const response = await fetch('https://localhost:7036/api/Users/Register', {  // Change URL as needed
+            const response = await fetch(`${apiUrl}/Users/Register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

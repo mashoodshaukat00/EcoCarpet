@@ -1,6 +1,6 @@
 import './App.css';
 import LoginForm from './components/Login/Login';
-import CarpetList from './components/ProductList/CarpetList';
+import CarpetList from './components/CarpetList/CarpetList';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
 import RegistrationForm from './components/Registratioin/RegistrationForm';
@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home';
 import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
-import CarpetDetails from './components/ProductList/CarpetDetails.jsx';
+import CarpetDetails from './components/CarpetDetails/CarpetDetails';
 
 function App() {
     

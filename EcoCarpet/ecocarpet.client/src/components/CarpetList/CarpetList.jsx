@@ -22,13 +22,17 @@ function CarpetList() {
     const [showFilters, setShowFilters] = useState(false);
     const navigate = useNavigate();
 
+    // environment variable
+    const apiUrl = import.meta.env.VITE_API_URL;
+    
     useEffect(() => {
+        
         const fetchCarpets = async () => {
             setLoading(true);
             setError(null);
 
             try {
-                let url = 'https://localhost:7036/api/Carpet/filter';
+                let url = `${apiUrl}/Carpet/filter`;
                 const queryParams = new URLSearchParams();
                 if (material) queryParams.append('material', material);
                 if (color) queryParams.append('color', color);
@@ -54,12 +58,12 @@ function CarpetList() {
         };
 
         fetchCarpets();
-    }, [material, color, dimensions, status]);
+    }, [material, color, dimensions, status, apiUrl]);
 
     useEffect(() => {
         const fetchFilterOptions = async () => {
             try {
-                const response = await fetch('https://localhost:7036/api/Carpet');
+                const response = await fetch(`${apiUrl}/Carpet`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -75,7 +79,7 @@ function CarpetList() {
         };
 
         fetchFilterOptions();
-    }, []);
+    }, [apiUrl]);
 
     // 🔹 Remove a filter value
     const clearFilter = (filterType) => {
