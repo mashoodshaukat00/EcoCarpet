@@ -7,11 +7,14 @@ const SubscriptionPage = () => {
 
     const userId = localStorage.getItem("userId");
 
+    // environment variable
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
-        axios.get("https://localhost:7036/api/subscriptions")
+        axios.get(`${apiUrl}/subscriptions`)
             .then(response => setSubscriptions(response.data))
             .catch(error => console.error("Error fetching subscriptions:", error));
-    }, []);
+    }, [apiUrl]);
 
     const selectPlan = async (plan) => {
         setSelectedPlan(plan);

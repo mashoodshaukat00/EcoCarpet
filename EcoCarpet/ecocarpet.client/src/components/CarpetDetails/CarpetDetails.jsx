@@ -5,11 +5,14 @@ function CarpetDetails() {
     const { id } = useParams(); // 🔹 Henter ID fra URL-en
     const [carpet, setCarpet] = useState(null);
 
+    // environment variable
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
         console.log(`Fetching details for carpet ID: ${id}`); // ✅ Debugging
         const fetchCarpetDetails = async () => {
             try {
-                const response = await fetch(`https://localhost:7036/api/Carpet/${id}`);
+                const response = await fetch(`${apiUrl}/Carpet/${id}`);
                 if (!response.ok) {
                     throw new Error("Carpet not found");
                 }

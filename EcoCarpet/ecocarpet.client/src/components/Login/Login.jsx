@@ -5,18 +5,20 @@ const LoginForm = () => {
         Email: '',
         Password: '',
     });
-    console.log('logindata:', loginData);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setLoginData({ ...loginData, [name]: value });
     };
 
+    // environment variable
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://localhost:7036/api/Users/Login', {  // Change URL as needed
+            const response = await fetch(`${apiUrl}/Users/Login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
