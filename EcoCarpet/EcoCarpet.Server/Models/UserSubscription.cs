@@ -24,7 +24,7 @@ namespace EcoCarpet.Server.Models
         public DateTime? RenewalDate { get; set; }
 
         [Required]
-        public string Status { get; set; } = "Active"; // Active, Expired, Cancelled
+        public string Status { get; set; } = "Active"; // Active, Expired
 
         public int CurrentCarpets { get; set; } = 0;
 
