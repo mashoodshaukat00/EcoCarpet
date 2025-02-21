@@ -26,7 +26,7 @@ const SubscriptionPage = () => {
 
         try {
             const response = await axios.post( 
-                "https://localhost:7036/api/usersubscriptions",
+                `${apiUrl}/usersubscriptions`,
                 {
                     userID: parseInt(userId), 
                     subscriptionID: plan.subscriptionID, 
@@ -69,7 +69,7 @@ const SubscriptionPage = () => {
                                 {plan.planName}
                             </h3>
                             <p className="text-green-600 font-semibold text-xl mb-2">
-                                ${plan.annualFee.toFixed(2)}/year
+                                {plan.annualFee} NOK/Year
                             </p>
                             <p className="text-sm text-gray-600 mb-2">
                                 Carpet Limit: <strong>{plan.carpetLimit}</strong>

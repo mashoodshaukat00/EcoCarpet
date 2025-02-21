@@ -55,15 +55,8 @@ namespace EcoCarpet.Server.Controllers
 
             return Ok(new { message = $"{carpets.Count} carpets seeded successfully." });
         }
-        [HttpDelete]
-        public IActionResult ClearCarpetTable()
-        {
-            _context.Database.ExecuteSqlRaw("TRUNCATE TABLE Carpets");
-            return NoContent();
-        }
-        
 
-
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Carpet>>> GetCarpets()
         {
