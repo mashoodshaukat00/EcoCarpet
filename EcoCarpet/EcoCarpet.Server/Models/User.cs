@@ -46,5 +46,12 @@ namespace EcoCarpet.Server.Models
         [MaxLength(100)]
         public string PasswordHash { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        // Foreign key – each user chooses one subscription plan.
+        [Required]
+        public int SubscriptionID { get; set; }
+
+        // Navigation to the subscription that the user has chosen.
+        public Subscription Subscription { get; set; }
     }
 }

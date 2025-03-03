@@ -9,7 +9,7 @@ namespace EcoCarpet.Server.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
-        public DbSet<UserSubscription> UserSubscriptions { get; set; }
+        public DbSet<Carpet> Carpets { get; set; }
 
 
         // Override the onModelCreating method to configure fluet API
@@ -18,21 +18,13 @@ namespace EcoCarpet.Server.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure User entity
-            modelBuilder.Entity<User>(entity =>
-            {
-                // Rename table to Users (plural)
-                entity.ToTable("Users");
-
-                // Configure primary key (renamed from CustomerId to UserId)
-                entity.HasKey(u => u.UserID)
-                      .HasName("PK_Users");
-
-                // Configure column name explicitly (optional but explicit)
-                entity.Property(u => u.UserID)
-                      .HasColumnName("UserID");
-            });
-        }
-        public DbSet<Carpet> Carpets { get; set; }
+            // Configure one-to-many: Subscription -> Users.
+            // One subscription plan can have many users.
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Subscription)
+                .WithMany(s => s.Users)
+                .HasForeignKey(u => u.SubscriptionID)
+                .OnDelete(DeleteBehavior.Restrict);
+        }        
     }
 }

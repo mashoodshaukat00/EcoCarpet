@@ -94,7 +94,20 @@ namespace EcoCarpet.Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PlanName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RenewalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -107,8 +120,7 @@ namespace EcoCarpet.Server.Migrations
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
@@ -160,58 +172,30 @@ namespace EcoCarpet.Server.Migrations
                         .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
 
-                    b.HasKey("UserID")
-                        .HasName("PK_Users");
-
-                    b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("EcoCarpet.Server.Models.UserSubscription", b =>
-                {
-                    b.Property<int>("UserSubscriptionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserSubscriptionID"));
-
-                    b.Property<int>("CurrentCarpets")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("RenewalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("SubscriptionID")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserSubscriptionID");
+                    b.HasKey("UserID");
 
                     b.HasIndex("SubscriptionID");
 
-                    b.ToTable("UserSubscriptions");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EcoCarpet.Server.Models.UserSubscription", b =>
+            modelBuilder.Entity("EcoCarpet.Server.Models.User", b =>
                 {
                     b.HasOne("EcoCarpet.Server.Models.Subscription", "Subscription")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("SubscriptionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Subscription");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.Subscription", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
