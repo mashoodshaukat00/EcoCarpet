@@ -40,26 +40,7 @@ namespace EcoCarpet.Server.Controllers
             }
             return subscription;
         }
-
-        // POST: api/subscriptions
-        // Creates a new subscription. If EndDate isn't set, defaults to one year from StartDate.
-        [HttpPost]
-        public async Task<ActionResult<Subscription>> CreateSubscription(Subscription subscription)
-        {
-            if (subscription.EndDate == default)
-            {
-                subscription.EndDate = subscription.StartDate.AddYears(1);
-            }
-
-            _context.Subscriptions.Add(subscription);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(
-                nameof(GetSubscription),
-                new { id = subscription.SubscriptionID },
-                subscription);
-        }
-
+       
         // PUT: api/subscriptions/{id}
         // Updates an existing subscription by id.
         [HttpPut("{id}")]
@@ -155,33 +136,7 @@ namespace EcoCarpet.Server.Controllers
             _context.Subscriptions.AddRange(subscriptions);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetSubscriptions), subscriptions);
-        }
-
-        // POST: api/subscriptions/{subscriptionId}/users/{userId}
-        // Associates a user with a subscription.
-        [HttpPost("{subscriptionId}/users/{userId}")]
-        public async Task<IActionResult> AddUserToSubscription(int subscriptionId, int userId)
-        {
-            var subscription = await _context.Subscriptions
-                                             .Include(s => s.Users)
-                                             .FirstOrDefaultAsync(s => s.SubscriptionID == subscriptionId);
-            if (subscription == null)
-            {
-                return NotFound($"Subscription with ID {subscriptionId} not found.");
-            }
-
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-            {
-                return NotFound($"User with ID {userId} not found.");
-            }
-
-            // Add the user to the subscription's Users collection.
-            subscription.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return Ok(subscription);
-        }
+        }       
 
         // Helper method to check if a subscription exists.
         private bool SubscriptionExists(int id)

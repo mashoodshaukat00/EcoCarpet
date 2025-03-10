@@ -1,0 +1,69 @@
+﻿import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// this is just a sample page for backend testing
+// this is just a sample page for backend testing
+// this is just a sample page for backend testing
+
+const CartPage = () => {
+    const [cartCount, setCartCount] = useState(0);
+    const navigate = useNavigate();
+    const maxItems = 5;
+
+    const addItem = () => {
+        if (cartCount < maxItems) {
+            setCartCount(cartCount + 1);
+        }
+    };
+
+    const removeItem = () => {
+        if (cartCount > 0) {
+            setCartCount(cartCount - 1);
+        }
+    };
+
+    // Determine subscription based on cart count.
+    // Mapping as provided: 1 => Gold, 2 => Diamond, 4 or 5 => Platinum.
+    const getSubscriptionId = () => {
+        if (cartCount === 1) return 1;       // Gold (SubscriptionID = 1)
+        if (cartCount === 2 || cartCount === 3) return 2;       // Diamond (SubscriptionID = 2)
+        if (cartCount === 4 || cartCount === 5) return 3; // Platinum (SubscriptionID = 3)
+        // For cartCount of 0 or other values (like 3), default to Gold.
+        return 1;
+    };
+
+    const handleCheckout = () => {
+        const subscriptionID = getSubscriptionId();
+        // Redirect to the registration page with the subscription ID as a query parameter.
+        navigate(`/signup?subscriptionID=${subscriptionID}`);
+    };
+
+    return (
+        <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+            <div className="flex items-center space-x-4">
+                <button onClick={removeItem} className="bg-red-500 text-white px-4 py-2 rounded">−</button>
+                <span className="text-xl">{cartCount} {cartCount === 1 ? "item" : "items"}</span>
+                <button onClick={addItem} className="bg-green-500 text-white px-4 py-2 rounded">+</button>
+            </div>
+            <div className="mt-4">
+                {cartCount > 0 ? (
+                    <p className="text-lg">
+                        Your selected subscription will be:{" "}
+                        {(cartCount === 1 && "Gold") ||
+                            (cartCount === 2 && "Diamond") ||
+                            ((cartCount === 4 || cartCount === 5) && "Platinum") ||
+                            "Gold (default)"}
+                    </p>
+                ) : (
+                    <p className="text-lg">Please add at least one carpet to your cart.</p>
+                )}
+            </div>
+            <button onClick={handleCheckout} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded">
+                Checkout
+            </button>
+        </div>
+    );
+};
+
+export default CartPage;

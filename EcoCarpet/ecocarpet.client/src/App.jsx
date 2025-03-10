@@ -9,6 +9,7 @@ import Home from './components/Home/Home';
 import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 import CarpetDetails from './components/CarpetDetails/CarpetDetails';
+import CartPage from './components/CartPage/CartPage';
 
 function App() {
     
@@ -27,7 +28,8 @@ function App() {
                             <Route path="/products" element={<CarpetList />} />
                             <Route path="/subscriptions" element={<SubscriptionPage />} />
                             <Route path="*" element={<NoPage />} />
-                            <Route path="/products/:id" element={<CarpetDetails />} /> 
+                            <Route path="/products/:id" element={<CarpetDetails />} />
+                            <Route path="/cart" element={<CartPage />} />                           
                         
                     </Routes>
                 

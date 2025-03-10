@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EcoCarpet.Server.Models
 {
@@ -52,6 +53,7 @@ namespace EcoCarpet.Server.Models
         public int SubscriptionID { get; set; }
 
         // Navigation to the subscription that the user has chosen.
-        public Subscription Subscription { get; set; }
+        [JsonIgnore]
+        public Subscription? Subscription { get; set; }
     }
 }
