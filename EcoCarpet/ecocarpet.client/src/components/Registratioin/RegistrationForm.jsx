@@ -1,7 +1,17 @@
 // src/components/RegistrationForm.jsx
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+// Helper hook to parse query parameters.
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 const RegistrationForm = () => {
+    const query = useQuery();
+    const subscriptionIdFromQuery = query.get('subscriptionID') || 1;
+    console.log('Subscription ID from query:', subscriptionIdFromQuery);
+
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -12,6 +22,7 @@ const RegistrationForm = () => {
         PostalCode: '',
         PhoneNumber: '',
         PasswordHash: '',
+        subscriptionID: subscriptionIdFromQuery, // Pre-populated from query parameter.
     });
 
     const handleChange = (e) => {
@@ -148,6 +159,8 @@ const RegistrationForm = () => {
                             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
                     </div>
                 </div>
+                {/* Hidden Field for SubscriptionID (pre-populated) */}
+                <input type="hidden" onChange={handleChange} name="subscriptionID" value={formData.subscriptionID} />
                 <button type="submit" className="mt-6 w-64 bg-yellow-500 text-black py-2 rounded-md shadow-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition duration-300">
                     Register
                 </button>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcoCarpet.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250129142025_carpet")]
-    partial class carpet
+    [Migration("20250303111658_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,17 @@ namespace EcoCarpet.Server.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Descriptions")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Dimensions")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ImgName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -70,13 +80,52 @@ namespace EcoCarpet.Server.Migrations
                     b.ToTable("Carpets");
                 });
 
-            modelBuilder.Entity("EcoCarpet.Server.Models.Customer", b =>
+            modelBuilder.Entity("EcoCarpet.Server.Models.Subscription", b =>
                 {
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("SubscriptionID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionID"));
+
+                    b.Property<decimal>("AnnualFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CarpetLimit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PlanName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RenewalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubscriptionID");
+
+                    b.ToTable("Subscriptions");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -118,17 +167,38 @@ namespace EcoCarpet.Server.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("Postalcode")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
-                    b.HasKey("CustomerID");
+                    b.Property<int>("SubscriptionID")
+                        .HasColumnType("int");
 
-                    b.ToTable("Customers");
+                    b.HasKey("UserID");
+
+                    b.HasIndex("SubscriptionID");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.User", b =>
+                {
+                    b.HasOne("EcoCarpet.Server.Models.Subscription", "Subscription")
+                        .WithMany("Users")
+                        .HasForeignKey("SubscriptionID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Subscription");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.Subscription", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

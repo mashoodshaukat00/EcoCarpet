@@ -38,5 +38,6 @@ namespace EcoCarpet.Server.Models
         [Required]
         [MaxLength(100)]
         public string? ImgName { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

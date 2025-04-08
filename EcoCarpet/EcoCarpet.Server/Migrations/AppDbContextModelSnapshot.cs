@@ -94,7 +94,20 @@ namespace EcoCarpet.Server.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PlanName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RenewalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -107,8 +120,7 @@ namespace EcoCarpet.Server.Migrations
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
@@ -160,58 +172,181 @@ namespace EcoCarpet.Server.Migrations
                         .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
 
-                    b.HasKey("UserID")
-                        .HasName("PK_Users");
+                    b.Property<int>("SubscriptionID")
+                        .HasColumnType("int");
 
-                    b.ToTable("Users", (string)null);
+                    b.HasKey("UserID");
+
+                    b.HasIndex("SubscriptionID");
+
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EcoCarpet.Server.Models.UserSubscription", b =>
+            modelBuilder.Entity("Order", b =>
                 {
-                    b.Property<int>("UserSubscriptionID")
+                    b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserSubscriptionID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
 
-                    b.Property<int>("CurrentCarpets")
+                    b.Property<DateTime?>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NextChangeDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndDate")
+                    b.HasKey("OrderID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailID"));
+
+                    b.Property<int>("CarpetID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailID");
+
+                    b.HasIndex("CarpetID");
+
+                    b.HasIndex("OrderID");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Payment", b =>
+                {
+                    b.Property<int>("PaymentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("RenewalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubscriptionID")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.HasKey("UserSubscriptionID");
+                    b.HasKey("PaymentID");
 
-                    b.HasIndex("SubscriptionID");
+                    b.HasIndex("UserID");
 
-                    b.ToTable("UserSubscriptions");
+                    b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("EcoCarpet.Server.Models.UserSubscription", b =>
+            modelBuilder.Entity("EcoCarpet.Server.Models.User", b =>
                 {
                     b.HasOne("EcoCarpet.Server.Models.Subscription", "Subscription")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("SubscriptionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Subscription");
+                });
+
+            modelBuilder.Entity("Order", b =>
+                {
+                    b.HasOne("EcoCarpet.Server.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OrderDetail", b =>
+                {
+                    b.HasOne("EcoCarpet.Server.Models.Carpet", "Carpet")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("CarpetID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carpet");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Payment", b =>
+                {
+                    b.HasOne("EcoCarpet.Server.Models.User", "User")
+                        .WithMany("Payments")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.Carpet", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.Subscription", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("EcoCarpet.Server.Models.User", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Payments");
+                });
+
+            modelBuilder.Entity("Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
