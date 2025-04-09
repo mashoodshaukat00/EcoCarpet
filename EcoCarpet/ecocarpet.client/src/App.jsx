@@ -10,19 +10,10 @@ import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 import CarpetDetails from './components/CarpetDetails/CarpetDetails';
 import CartPage from './components/CartPage/CartPage';
-import { useState } from 'react';
+import useAuth from './utilities/hooks/useAuth';
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("userId"));
-
-    const handleLogout = () => {
-        localStorage.removeItem("userId");
-        setIsAuthenticated(false);
-    };
-
-    const handleLogin = () => {
-        setIsAuthenticated(true);
-    };
+    const { isAuthenticated, handleLogin, handleLogout } = useAuth();
 
     return (    
         <BrowserRouter>
