@@ -1,9 +1,11 @@
 ﻿import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+
 function CarpetDetails() {
     const { id } = useParams(); // 🔹 Henter ID fra URL-en
     const [carpet, setCarpet] = useState(null);
+    console.log("carpet", carpet)
 
     // environment variable
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -34,7 +36,8 @@ function CarpetDetails() {
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
             <h1 className="text-2xl font-bold text-gray-800">{carpet.name}</h1>
             <img
-                src={carpet.imageUrl || "https://www.flooringsuperstore.com/media/catalog/product/cache/293b85e20f7172310ee4e8f824e7e68c/a/l/allure_-_rioja_cameo.jpg"}
+              
+                src={`/images/${carpet.imgName}.jpg`}
                 alt={carpet.name}
                 className="w-full h-64 object-cover mt-4 rounded-lg"
             />

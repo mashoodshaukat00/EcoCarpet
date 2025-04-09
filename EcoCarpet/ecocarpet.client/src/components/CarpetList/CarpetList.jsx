@@ -149,7 +149,8 @@ function CarpetList() {
                     {carpets.map(carpet => (
                         <div key={carpet.carpetID} className="bg-white shadow-md rounded-lg overflow-hidden">
                             <img
-                                src={carpet.imageUrl || "https://www.flooringsuperstore.com/media/catalog/product/cache/293b85e20f7172310ee4e8f824e7e68c/a/l/allure_-_rioja_cameo.jpg"}
+                                src={`/images/${carpet.imgName}.jpg`}
+                                /* { src={carpet.imageUrl || "https://www.flooringsuperstore.com/media/catalog/product/cache/293b85e20f7172310ee4e8f824e7e68c/a/l/allure_-_rioja_cameo.jpg"}}*/
                                 alt={carpet.name}
                                 className="w-full h-40 object-cover"
                             />
