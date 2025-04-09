@@ -10,31 +10,37 @@ import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 import CarpetDetails from './components/CarpetDetails/CarpetDetails';
 import CartPage from './components/CartPage/CartPage';
+import { useState } from 'react';
 
 function App() {
-    
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("userId"));
+
+    const handleLogout = () => {
+        localStorage.removeItem("userId");
+        setIsAuthenticated(false);
+    };
+
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+    };
+
     return (    
         <BrowserRouter>
             <div className="flex flex-col min-h-screen">
-               
-                    <Nav/>
-            <main className="flex-grow bg-gray-100 p-4">
-                
+                <Nav isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+                <main className="flex-grow bg-gray-100 p-4">
                     <Routes>
-                       
-                            <Route path= "/"element={<Home/> } />
-                            <Route path="/login" element={<LoginForm />} />
-                            <Route path="/signup" element={<RegistrationForm />} />
-                            <Route path="/products" element={<CarpetList />} />
-                            <Route path="/subscriptions" element={<SubscriptionPage />} />
-                            <Route path="*" element={<NoPage />} />
-                            <Route path="/products/:id" element={<CarpetDetails />} />
-                            <Route path="/cart" element={<CartPage />} />                           
-                        
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+                        <Route path="/signup" element={<RegistrationForm />} />
+                        <Route path="/products" element={<CarpetList />} />
+                        <Route path="/subscriptions" element={<SubscriptionPage />} />
+                        <Route path="*" element={<NoPage />} />
+                        <Route path="/products/:id" element={<CarpetDetails />} />
+                        <Route path="/cart" element={<CartPage />} />
                     </Routes>
-                
-            </main>
-                <Footer/>
+                </main>
+                <Footer />
             </div>
         </BrowserRouter>
     );   

@@ -1,74 +1,68 @@
-﻿import { useState } from 'react';
+﻿import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import useLoginForm from '../../utilities/hooks/useLoginForm';
 
-const LoginForm = () => {
-    const [loginData, setLoginData] = useState({
-        Email: '',
-        Password: '',
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setLoginData({ ...loginData, [name]: value });
-    };
-
-    // environment variable
+const LoginForm = ({ onLogin }) => {
+    const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await fetch(`${apiUrl}/Users/Login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(loginData),
-            });
-
-
-            if (!response.ok) {
-                throw new Error('Login failed');
-            }
-
-            const data = await response.json();
-
-            console.log("Login response:", data);
-
-            if (data.user && data.user.userID) { 
-                localStorage.setItem("userId", data.user.userID.toString());
-                alert("Logged in successfully!");
-            } else {
-                alert("cannot fetch userId from the server.");
-            }
-
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-            alert('Failed to login. Please try again later.');
-        }
-    };
+    const { loginData, handleChange, handleSubmit } = useLoginForm(onLogin, navigate, apiUrl);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="email"
-                name="Email"
-                placeholder="Email"
-                value={loginData.Email}
-                onChange={handleChange}
-                required
-            />
-            <input
-                type="password"
-                name="Password"
-                placeholder="Password"
-                value={loginData.Password}
-                onChange={handleChange}
-                required
-            />
-            <button type="submit">Login</button>
-        </form>
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+                <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            name="Email"
+                            placeholder="Enter your email"
+                            value={loginData.Email}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                            Password
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
+                            name="Password"
+                            placeholder="Enter your password"
+                            value={loginData.Password}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                        Login
+                    </button>
+                </form>
+                <p className="text-sm text-gray-600 text-center mt-4">
+                    Don't have an account?{' '}
+                    <a href="/signup" className="text-blue-500 hover:underline">
+                        Sign up
+                    </a>
+                </p>
+            </div>
+        </div>
     );
+};
+
+LoginForm.propTypes = {
+    onLogin: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import Logout from "../Logout/Logout";
 
-const Nav = () => {
+const Nav = ({ isAuthenticated, onLogout }) => {
     return (
         <header className="bg-gray-800 text-white p-4">
             <nav className="max-w-7xl mx-auto flex justify-between items-center">
@@ -9,7 +11,13 @@ const Nav = () => {
                     <div className="text-xl font-bold"><Link to="/" className="hover:underline">EcoCarpet</Link></div>
                 </div>
                 <ul className="flex space-x-4">
-                    <li><Link to="/login" className="hover:underline">Login</Link></li>
+                    <li>
+                        {isAuthenticated ? (
+                            <Logout onLogout={onLogout} />
+                        ) : (
+                            <Link to="/login" className="hover:underline">Login</Link>
+                        )}
+                    </li>
                     <li><Link to="/signup" className="hover:underline">Signup</Link></li>
                     <li><Link to="/products" className="hover:underline">Products</Link></li>
                     <li><Link to="/subscriptions" className="hover:underline">Subscriptions</Link></li>
@@ -17,9 +25,12 @@ const Nav = () => {
                 </ul>
             </nav>                   
         </header>
-       
-    )
-}
+    );
+};
+Nav.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+    onLogout: PropTypes.func.isRequired,
+};
 
 export default Nav;
 
