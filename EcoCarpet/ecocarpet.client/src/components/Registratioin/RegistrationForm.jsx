@@ -1,170 +1,157 @@
 // src/components/RegistrationForm.jsx
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-
-// Helper hook to parse query parameters.
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+import useRegistrationForm from '../../utilities/hooks/useRegistrationForm';
 
 const RegistrationForm = () => {
-    const query = useQuery();
-    const subscriptionIdFromQuery = query.get('subscriptionID') || 1;
-    console.log('Subscription ID from query:', subscriptionIdFromQuery);
+    const { formData, handleChange, handleSubmit } = useRegistrationForm();
 
-    const [formData, setFormData] = useState({
-        FirstName: '',
-        LastName: '',
-        Email: '',
-        Address: '',
-        City: '',
-        Country: '',
-        PostalCode: '',
-        PhoneNumber: '',
-        PasswordHash: '',
-        subscriptionID: subscriptionIdFromQuery, // Pre-populated from query parameter.
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    // environment variable
-    const apiUrl = import.meta.env.VITE_API_URL;
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log('Form data before submission:', formData);
-        try {
-            const response = await fetch(`${apiUrl}/Users/Register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            console.log('Fetch response:', response);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Error details:', errorData);
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            console.log('Response:', response);
-            console.log('Response data:', data);
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
     return (
-        <div className="mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-3xl font-semibold mb-6">Registration Form</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">First Name</label>
-                        <input type="text"
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+                <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Register</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                            First Name
+                        </label>
+                        <input
+                            id="firstName"
+                            type="text"
                             name="FirstName"
-                            placeholder="First Name"
+                            placeholder="Enter your first name"
                             value={formData.FirstName}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">Last Name</label>
+                    <div>
+                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                            Last Name
+                        </label>
                         <input
+                            id="lastName"
                             type="text"
                             name="LastName"
-                            placeholder="Last Name"
+                            placeholder="Enter your last name"
                             value={formData.LastName}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">Email</label>
-                        <input type="email"
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
                             name="Email"
-                            placeholder="Email"
+                            placeholder="Enter your email"
                             value={formData.Email}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">Phone Number</label>
-                        <input type="tel"
-                            name="PhoneNumber"
-                            placeholder="Phone Number"
-                            pattern="[0-9]{8}"
-                            title="Eight digit phone number"
-                            value={formData.PhoneNumber}
-                            onChange={handleChange}
-                            required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
-                    </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">Address</label>
-                        <input type="text"
+                    <div>
+                        <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                            Address
+                        </label>
+                        <input
+                            id="address"
+                            type="text"
                             name="Address"
-                            placeholder="Address"
+                            placeholder="Enter your address"
                             value={formData.Address}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">City</label>
-                        <input type="text"
+                    <div>
+                        <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                            City
+                        </label>
+                        <input
+                            id="city"
+                            type="text"
                             name="City"
-                            placeholder="City"
+                            placeholder="Enter your city"
                             value={formData.City}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">Postal Code</label>
-                        <input type="tel"
+                    <div>
+                        <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-1">
+                            Postal Code
+                        </label>
+                        <input
+                            id="postalCode"
+                            type="text"
                             name="PostalCode"
-                            placeholder="PostalCode"
-                            pattern="[0-9]{4}"
-                            title="Four digit postal code"
+                            placeholder="Enter your postal code"
                             value={formData.PostalCode}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col">
-                        <label className="text-gray-700 font-medium mb-2">Country</label>
-                        <input type="text"
+                    <div>
+                        <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
+                            Country
+                        </label>
+                        <input
+                            id="country"
+                            type="text"
                             name="Country"
-                            placeholder="Country"
+                            placeholder="Enter your country"
                             value={formData.Country}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                    <div className="flex flex-col md:col-span-2">
-                        <label className="text-gray-700 font-medium mb-2">Password</label>
-                        <input type="password"
+                    <div>
+                        <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-1">
+                            Phone Number
+                        </label>
+                        <input
+                            id="phoneNumber"
+                            type="text"
+                            name="PhoneNumber"
+                            placeholder="Enter your phone number"
+                            value={formData.PhoneNumber}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                            Password
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
                             name="PasswordHash"
-                            placeholder="Password"
+                            placeholder="Enter your password"
                             value={formData.PasswordHash}
                             onChange={handleChange}
                             required
-                            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                </div>
-                {/* Hidden Field for SubscriptionID (pre-populated) */}
-                <input type="hidden" onChange={handleChange} name="subscriptionID" value={formData.subscriptionID} />
-                <button type="submit" className="mt-6 w-64 bg-yellow-500 text-black py-2 rounded-md shadow-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition duration-300">
-                    Register
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                        Register
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
