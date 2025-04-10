@@ -26,16 +26,20 @@ const CartPage = () => {
     // Mapping as provided: 1 => Gold, 2 => Diamond, 4 or 5 => Platinum.
     const getSubscriptionId = () => {
         if (cartCount === 1) return 1;       // Gold (SubscriptionID = 1)
-        if (cartCount === 2 || cartCount === 3) return 2;       // Diamond (SubscriptionID = 2)
+        if (cartCount === 2 || cartCount === 3) return 2;       // Diamond (SubscriptionID = 2 or 3)
         if (cartCount === 4 || cartCount === 5) return 3; // Platinum (SubscriptionID = 3)
-        // For cartCount of 0 or other values (like 3), default to Gold.
-        return 1;
+        return null;
     };
 
     const handleCheckout = () => {
         const subscriptionID = getSubscriptionId();
-        // Redirect to the registration page with the subscription ID as a query parameter.
-        navigate(`/signup?subscriptionID=${subscriptionID}`);
+        if(subscriptionID === null){
+            alert("Please add at least one carpet to your cart.");
+            return;
+        } 
+        else{
+            navigate(`/signup?subscriptionID=${subscriptionID}`);
+        }
     };
 
     return (
@@ -51,9 +55,8 @@ const CartPage = () => {
                     <p className="text-lg">
                         Your selected subscription will be:{" "}
                         {(cartCount === 1 && "Gold") ||
-                            (cartCount === 2 && "Diamond") ||
-                            ((cartCount === 4 || cartCount === 5) && "Platinum") ||
-                            "Gold (default)"}
+                            ((cartCount === 2 || cartCount === 3) && "Diamond") ||
+                            ((cartCount === 4 || cartCount === 5) && "Platinum")}
                     </p>
                 ) : (
                     <p className="text-lg">Please add at least one carpet to your cart.</p>

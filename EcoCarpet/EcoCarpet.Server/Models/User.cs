@@ -55,7 +55,7 @@ namespace EcoCarpet.Server.Models
         // Navigation to the subscription that the user has chosen.
         [JsonIgnore]
         public Subscription? Subscription { get; set; }
-        public ICollection<Payment> Payments { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Payment>? Payments { get; set; }
+        public ICollection<Order>? Orders { get; set; }
     }
 }
