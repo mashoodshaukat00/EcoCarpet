@@ -1,6 +1,16 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const useRegistrationForm = () => {
+
+// Helper hook to parse query parameters.
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+const query = useQuery();
+    const subscriptionIdFromQuery = query.get('subscriptionID');
+    
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -11,6 +21,7 @@ const useRegistrationForm = () => {
         Country: '',
         PhoneNumber: '',
         PasswordHash: '',
+        subscriptionID: subscriptionIdFromQuery,
     });
 
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -34,19 +45,14 @@ const useRegistrationForm = () => {
                 },
                 body: JSON.stringify(formData),
             });
-           
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('Error details:', errorData);
-                throw new Error('Registration failed');
+                alert(`Registration failed: ${errorData.Title || 'Unknown error'}`);
+                return;
             }
-
-            const data = await response.json();
-            alert('Registration successful!');
-            console.log('Response data:', data);
         } catch (error) {
-            console.error('There was a problem with the registration:', error);
+            console.error('There was a problem with the registration:', error.message);
             alert('Failed to register. Please try again later.');
         }
     };
