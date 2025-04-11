@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 const useLoginForm = (onLogin, navigate, apiUrl) => {
     const [loginData, setLoginData] = useState({
@@ -14,10 +15,8 @@ const useLoginForm = (onLogin, navigate, apiUrl) => {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
+    const loginMutation = useMutation({
+        mutationFn: async (loginData) => {
             const response = await fetch(`${apiUrl}/Users/Login`, {
                 method: 'POST',
                 headers: {
@@ -27,11 +26,13 @@ const useLoginForm = (onLogin, navigate, apiUrl) => {
             });
 
             if (!response.ok) {
-                throw new Error('Login failed');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Login failed');
             }
 
-            const data = await response.json();
-
+            return response.json();
+        },
+        onSuccess: (data) => {
             if (data.user && data.user.userID) {
                 localStorage.setItem('userId', data.user.userID.toString());
                 alert('Logged in successfully!');
@@ -40,13 +41,24 @@ const useLoginForm = (onLogin, navigate, apiUrl) => {
             } else {
                 alert('Cannot fetch userId from the server.');
             }
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
+        },
+        onError: (error) => {
+            console.error('There was a problem with the login:', error.message);
             alert('Failed to login. Please try again later.');
-        }
+        },
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        loginMutation.mutate(loginData);
     };
 
-    return { loginData, handleChange, handleSubmit };
+    return {
+        loginData,
+        handleChange,
+        handleSubmit,
+        isLoading: loginMutation.status === 'pending' || loginMutation.isPending
+    };
 };
 
 export default useLoginForm;

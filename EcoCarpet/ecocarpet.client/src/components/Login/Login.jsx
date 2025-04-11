@@ -6,7 +6,7 @@ const LoginForm = ({ onLogin }) => {
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    const { loginData, handleChange, handleSubmit } = useLoginForm(onLogin, navigate, apiUrl);
+    const { loginData, handleChange, handleSubmit, isLoading } = useLoginForm(onLogin, navigate, apiUrl);
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -46,8 +46,9 @@ const LoginForm = ({ onLogin }) => {
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                        disabled={isLoading}
                     >
-                        Login
+                        {isLoading ? 'Logging in...' : 'Login'}
                     </button>
                 </form>
                 <p className="text-sm text-gray-600 text-center mt-4">
