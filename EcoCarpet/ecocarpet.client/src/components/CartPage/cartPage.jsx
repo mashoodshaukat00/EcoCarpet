@@ -23,11 +23,10 @@ const CartPage = () => {
     };
 
     // Determine subscription based on cart count.
-    // Mapping as provided: 1 => Gold, 2 => Diamond, 4 or 5 => Platinum.
     const getSubscriptionId = () => {
-        if (cartCount === 1) return 1;       // Gold (SubscriptionID = 1)
-        if (cartCount === 2 || cartCount === 3) return 2;       // Diamond (SubscriptionID = 2 or 3)
-        if (cartCount === 4 || cartCount === 5) return 3; // Platinum (SubscriptionID = 3)
+        if (cartCount === 1) return 1;
+        if (cartCount === 2 || cartCount === 3) return 2;
+        if (cartCount === 4 || cartCount === 5) return 3;
         return null;
     };
 
