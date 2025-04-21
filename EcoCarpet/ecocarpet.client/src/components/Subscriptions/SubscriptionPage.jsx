@@ -3,11 +3,6 @@ import axios from "axios";
 
 const SubscriptionPage = () => {
     const [subscriptions, setSubscriptions] = useState([]);
-    const [selectedPlan, setSelectedPlan] = useState(null);
-
-    const userId = localStorage.getItem("userId");
-
-    // environment variable
     const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
@@ -16,83 +11,44 @@ const SubscriptionPage = () => {
             .catch(error => console.error("Error fetching subscriptions:", error));
     }, [apiUrl]);
 
-    const selectPlan = async (plan) => {
-        setSelectedPlan(plan);
+   return (
+        <div className="bg-gray-100 py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
+                    Choose a Subscription Plan
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {subscriptions.map(plan => (
+                        <div key={plan.subscriptionID} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+                            {/* Header Section */}
+                            <div className={`py-4 text-center text-white font-bold text-xl rounded-t-lg ${plan.planName === 'Gold' ? 'bg-blue-500' :
+                                plan.planName === 'Diamond' ? 'bg-orange-500' :
+                                    plan.planName === 'Platinum' ? 'bg-green-500' : 'bg-gray-400'
+                                }`}>
+                                {plan.planName.toUpperCase()}
+                            </div>
 
-        if (!userId) {
-            alert("You need to be logged in in order to choose a subscription!");
-            return;
-        }
-
-        try {
-            const response = await axios.post( 
-                `${apiUrl}/usersubscriptions`,
-                {
-                    userID: parseInt(userId), 
-                    subscriptionID: plan.subscriptionID, 
-                    startDate: new Date().toISOString(), 
-                    status: "Active",
-                    currentCarpets: 0
-                },
-                {
-                    headers: { "Content-Type": "application/json" }
-                }
-            );
-
-            console.log("API Response:", response);
-
-            if (response.status === 201) {
-                console.log(`You selected: ${plan.planName}`);
-                alert(`subscription selected: ${plan.planName}`);
-            } else {
-                console.error("unexpected response from server:", response);
-                alert("cannot select subscription, please try again");
-            }
-        } catch (error) {
-            console.error("Failed to save the subscription:", error);
-            alert("cannot save subscription, please try again");
-        }
-    };
-
-    return (
-        <div className="max-w-5xl mx-auto p-6">
-            <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-                Choose a Subscription Plan
-            </h2>
-            <div className="flex flex-wrap justify-center gap-6">
-                {subscriptions.map(plan => (
-                    <div key={plan.subscriptionID}
-                        className="bg-gray-100 rounded-lg shadow-lg p-6 w-64 text-center border border-gray-300 hover:shadow-xl transition duration-300 flex flex-col justify-between h-full">
-
-                        <div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-2">
-                                {plan.planName}
-                            </h3>
-                            <p className="text-green-600 font-semibold text-xl mb-2">
-                                {plan.annualFee} NOK/Year
-                            </p>
-                            <p className="text-sm text-gray-600 mb-2">
-                                Carpet Limit: <strong>{plan.carpetLimit}</strong>
-                            </p>
-                            <p className="text-sm text-gray-600 flex-grow min-h-[80px] mb-4">
-                                {plan.description}
-                            </p>
+                            {/* Pricing and Features Section */}
+                            
+                                <div className="p-6 flex-grow flex flex-col justify-center items-center">
+                                    <div className="text-center text-4xl font-semibold mb-2">
+                                        {plan.annualFee} <span className="text-lg font-normal text-gray-500">NOK/Year</span>
+                                    </div>
+                                    <p className="text-gray-600 text-sm font-bold mb-4">Carpet Limit: {plan.carpetLimit}</p>
+                                    <ul className="mb-6 space-y-2 text-center">
+                                        {plan.description.split(', ').map((feature, index) => (
+                                            <li key={index} className="flex items-center justify-center">
+                                                <svg className="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                                       
                         </div>
-
-                        <button
-                            className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg border border-green-700 hover:bg-green-600 transition duration-300"
-                            onClick={() => selectPlan(plan)}
-                        >
-                            Select Plan
-                        </button>
-                    </div>
-                ))}
-            </div>
-            {selectedPlan && (
-                <p className="mt-4 text-green-600 font-semibold text-lg text-center">
-                    You selected: {selectedPlan.planName}
-                </p>
-            )}
+                    ))}
+                </div>
+                           </div>
         </div>
     );
 };
