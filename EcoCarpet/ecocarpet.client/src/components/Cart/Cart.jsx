@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // this is just a sample page for backend testing
 // this is just a sample page for backend testing
 
-const CartPage = () => {
+const Cart = () => {
     const [cartCount, setCartCount] = useState(0);
     const navigate = useNavigate();
     const maxItems = 5;
@@ -66,6 +66,5 @@ const CartPage = () => {
             </button>
         </div>
     );
-};
-
-export default CartPage;
+}
+export default Cart;
