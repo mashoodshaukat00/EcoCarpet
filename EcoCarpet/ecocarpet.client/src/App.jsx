@@ -9,7 +9,7 @@ import Home from './components/Home/Home';
 import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 import CarpetDetails from './components/CarpetDetails/CarpetDetails';
-import CartPage from './components/CartPage/CartPage';
+import Cart from './components/Cart/Cart';
 import useAuth from './utilities/hooks/useAuth';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
                         <Route path="/subscriptions" element={<SubscriptionPage />} />
                         <Route path="*" element={<NoPage />} />
                         <Route path="/products/:id" element={<CarpetDetails />} />
-                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/cart" element={<Cart />} />
                     </Routes>
                 </main>
                 <Footer />
