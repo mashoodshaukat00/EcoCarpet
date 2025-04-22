@@ -1,22 +1,50 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const Filter = ({
-    material,
-    setMaterial,
-    color,
-    setColor,
-    dimensions,
-    setDimensions,
-    status,
-    setStatus,
-    materials,
-    colors,
-    dimensionOptions,
-    statuses,
-    clearFilter
-}) => {
+const Filter = ({ apiUrl, onFilterChange }) => {
+    const [material, setMaterial] = useState('');
+    const [color, setColor] = useState('');
+    const [dimensions, setDimensions] = useState('');
+    const [status, setStatus] = useState('');
+
+    const [materials, setMaterials] = useState([]);
+    const [colors, setColors] = useState([]);
+    const [dimensionOptions, setDimensionOptions] = useState([]);
+    const [statuses, setStatuses] = useState([]);
+
     const [showFilters, setShowFilters] = useState(false);
+
+    useEffect(() => {
+        const fetchFilterOptions = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/Carpet`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                setMaterials([...new Set(data.map(item => item.material))]);
+                setColors([...new Set(data.map(item => item.color))]);
+                setDimensionOptions([...new Set(data.map(item => item.dimensions))]);
+                setStatuses([...new Set(data.map(item => item.status))]);
+            } catch (err) {
+                console.error('Error fetching filter options:', err);
+            }
+        };
+
+        fetchFilterOptions();
+    }, [apiUrl]);
+
+    const clearFilter = (filterType) => {
+        if (filterType === 'material') setMaterial('');
+        if (filterType === 'color') setColor('');
+        if (filterType === 'dimensions') setDimensions('');
+        if (filterType === 'status') setStatus('');
+    };
+
+    useEffect(() => {
+        onFilterChange({ material, color, dimensions, status });
+    }, [material, color, dimensions, status, onFilterChange]);
 
     return (
         <div className="bg-gray-50 p-6 rounded-lg shadow-lg border border-gray-200">
@@ -63,10 +91,10 @@ const Filter = ({
 
                 {/* Selected Filters */}
                 <div className="col-span-1 sm:col-span-2 md:col-span-4 flex flex-wrap gap-3 mt-4">
-                    {material && <span className="bg-blue-100 text-blue-600 px-4 py-2 rounded-full flex items-center shadow-md">{material} <button onClick={() => clearFilter('material')} className="ml-2 text-gray-500 hover:text-gray-700">✖</button></span>}
-                    {color && <span className="bg-red-100 text-red-600 px-4 py-2 rounded-full flex items-center shadow-md">{color} <button onClick={() => clearFilter('color')} className="ml-2 text-gray-500 hover:text-gray-700">✖</button></span>}
-                    {dimensions && <span className="bg-green-100 text-green-600 px-4 py-2 rounded-full flex items-center shadow-md">{dimensions} <button onClick={() => clearFilter('dimensions')} className="ml-2 text-gray-500 hover:text-gray-700">✖</button></span>}
-                    {status && <span className="bg-purple-100 text-purple-600 px-4 py-2 rounded-full flex items-center shadow-md">{status} <button onClick={() => clearFilter('status')} className="ml-2 text-gray-500 hover:text-gray-700">✖</button></span>}
+                    {material && <span className="bg-blue-100 text-blue-600 px-4 py-2 rounded-full flex items-center shadow-md">{material} <button onClick={() => clearFilter('material')} className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer">✖</button></span>}
+                    {color && <span className="bg-red-100 text-red-600 px-4 py-2 rounded-full flex items-center shadow-md">{color} <button onClick={() => clearFilter('color')} className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer">✖</button></span>}
+                    {dimensions && <span className="bg-green-100 text-green-600 px-4 py-2 rounded-full flex items-center shadow-md">{dimensions} <button onClick={() => clearFilter('dimensions')} className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer">✖</button></span>}
+                    {status && <span className="bg-purple-100 text-purple-600 px-4 py-2 rounded-full flex items-center shadow-md">{status} <button onClick={() => clearFilter('status')} className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer">✖</button></span>}
                 </div>
             </div>
         </div>
@@ -74,19 +102,8 @@ const Filter = ({
 };
 
 Filter.propTypes = {
-    material: PropTypes.string.isRequired,
-    setMaterial: PropTypes.func.isRequired,
-    color: PropTypes.string.isRequired,
-    setColor: PropTypes.func.isRequired,
-    dimensions: PropTypes.string.isRequired,
-    setDimensions: PropTypes.func.isRequired,
-    status: PropTypes.string.isRequired,
-    setStatus: PropTypes.func.isRequired,
-    materials: PropTypes.arrayOf(PropTypes.string).isRequired,
-    colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-    dimensionOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    statuses: PropTypes.arrayOf(PropTypes.string).isRequired,
-    clearFilter: PropTypes.func.isRequired
+    apiUrl: PropTypes.string.isRequired,
+    onFilterChange: PropTypes.func.isRequired
 };
 
 export default Filter;

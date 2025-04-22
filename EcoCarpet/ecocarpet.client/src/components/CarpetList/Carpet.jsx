@@ -9,15 +9,16 @@ const Carpet = ({ carpet }) => {
             <img
                 src={`/images/${carpet.imgName}.jpg`}
                 alt={carpet.name}
-                className="w-full h-40 object-cover"
+                className="w-full h-40 object-cover cursor-pointer"
+                onClick={() => navigate(`/products/${carpet.carpetID}`)}
             />
             <div className="p-4">
-                <h3 className="text-lg font-semibold">{carpet.name}</h3>
+                <h3 className="text-lg font-semibold cursor-pointer" onClick={() => navigate(`/products/${carpet.carpetID}`)}>{carpet.name}</h3>
                 <p className="text-gray-600">{carpet.descriptions}</p>
                 <div className="mt-4">
                     <button
                         onClick={() => navigate(`/products/${carpet.carpetID}`)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full cursor-pointer"
                     >
                         View Product
                     </button>
