@@ -14,7 +14,11 @@ const useCartPageActions = (getSubscriptionId, navigate) => {
         navigate('/products');
     }, [navigate]);
 
-    return { handleCheckout, handleContinueShopping };
+    const handleGoToProduct = (carpetID) => {
+        navigate(`/products/${carpetID}`);
+    };
+
+    return { handleCheckout, handleContinueShopping, handleGoToProduct };
 };
 
 export default useCartPageActions;

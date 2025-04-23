@@ -8,7 +8,7 @@ const Cart = () => {
     const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const navigate = useNavigate();
 
-    const { handleCheckout, handleContinueShopping } = useCartPageActions(getSubscriptionId, navigate);
+    const { handleCheckout, handleContinueShopping, handleGoToProduct } = useCartPageActions(getSubscriptionId, navigate);
     const showAddOneMoreMsg = cartCount === 2 || cartCount === 4;
 
     return (
@@ -34,7 +34,11 @@ const Cart = () => {
                                 key={`${carpet.carpetID}-${idx}`}
                                 className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow p-4 gap-4"
                             >
-                                <div className="flex-shrink-0 flex items-center justify-center w-full sm:w-auto">
+                                <div
+                                    className="flex-shrink-0 flex items-center justify-center w-full sm:w-auto cursor-pointer"
+                                    onClick={() => handleGoToProduct(carpet.carpetID)}
+                                    title="View product details"
+                                >
                                     <img
                                         src={carpet.imgName ? `/images/${carpet.imgName}.jpg` : '/images/placeholder.jpg'}
                                         alt={carpet.name}
@@ -42,7 +46,13 @@ const Cart = () => {
                                     />
                                 </div>
                                 <div className="flex-1 w-full sm:w-auto text-center sm:text-left">
-                                    <div className="font-semibold text-lg">{carpet.name}</div>
+                                    <div
+                                        className="font-semibold text-lg cursor-pointer hover:underline"
+                                        onClick={() => handleGoToProduct(carpet.carpetID)}
+                                        title="View product details"
+                                    >
+                                        {carpet.name}
+                                    </div>
                                     <div className="text-gray-600 text-sm mt-1">{carpet.material} | {carpet.color} | {carpet.dimensions}</div>
                                     <div className="text-gray-500 text-xs mt-1">{carpet.descriptions}</div>
                                 </div>

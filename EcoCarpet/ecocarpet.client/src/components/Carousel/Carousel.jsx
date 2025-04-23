@@ -74,14 +74,14 @@ function Carousel() {
                 <Slider {...settings}>
                     {carpets.map((carpet) => (
                         <div key={carpet.carpetID} className="bg-white h-[450px] text-black flex flex-col">
-                            <div className='h-56 bg-indigo-500 flex justify-center items-center'>
-                                <img src={`/images/${carpet.imgName}.jpg`} alt={carpet.name} className='h-full w-full object-cover'/>
+                            <div className='h-56 bg-indigo-500 flex justify-center items-center cursor-pointer'>
+                                <img src={`/images/${carpet.imgName}.jpg`} alt={carpet.name} onClick={() => navigate(`/products/${carpet.carpetID}`)} className='h-full w-full object-cover'/>
                             </div>
                             <div className="description-container flex flex-col items-center gap-4 h-full">
-                              <p className="text-xl font-semibold">{carpet.name}</p>
+                              <p className="text-xl font-semibold cursor-pointer" onClick={() => navigate(`/products/${carpet.carpetID}`)}>{carpet.name}</p>
                               <p className="description flex-grow overflow-y-auto text-center max-h-[100px]">{carpet.descriptions}</p>
                                 <button onClick={() => navigate(`/products/${carpet.carpetID}`)}
-                                    className='bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl mt-2'>Read More</button>
+                                    className='bg-indigo-500 cursor-pointer text-white text-lg px-6 py-1 rounded-xl mt-2'>Read More</button>
                             </div>
                         </div>
                     ))}
