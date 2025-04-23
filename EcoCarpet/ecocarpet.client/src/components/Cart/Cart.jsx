@@ -1,23 +1,14 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../utilities/hooks/useCart';
+import useCartPageActions from '../../utilities/hooks/useCartPageActions';
 
 const Cart = () => {
     const { cartItems, addItem, removeItem, getSubscriptionId, maxItems, clearCart } = useCart();
     const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const navigate = useNavigate();
 
-    const handleCheckout = () => {
-        const subscriptionID = getSubscriptionId();
-        if (subscriptionID === null) {
-            alert("Please add at least one carpet to your cart.");
-            return;
-        }
-        navigate(`/signup?subscriptionID=${subscriptionID}`);
-    };
-
-    const handleContinueShopping = () => {
-        navigate('/products');
-    };
+    // Use the extracted hook for page actions
+    const { handleCheckout, handleContinueShopping } = useCartPageActions(getSubscriptionId, navigate);
 
     return (
         <div className="container mx-auto p-4">
