@@ -50,6 +50,12 @@ const Cart = () => {
     return (
         <div className="container mx-auto p-2 sm:p-4">
             <h1 className="text-2xl font-bold mb-4 text-center">Your Cart</h1>
+            {/* Show max items message at the top */}
+            {cartCount === maxItems && (
+                <div className="mb-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-800 rounded text-center font-medium">
+                    You have reached the maximum number of carpets (5) in your cart.
+                </div>
+            )}
             {cartCount > 0 && (
                 <div className="flex justify-end">
                     <button
@@ -148,7 +154,7 @@ const Cart = () => {
             )}
             {showAddOneMoreMsg && (
                 <div className="mb-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 rounded text-center font-medium">
-                    You can add one more item to your cart at no additional cost.
+                    You can add one more carpet to your cart at no additional cost.
                 </div>
             )}
             <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-center">
