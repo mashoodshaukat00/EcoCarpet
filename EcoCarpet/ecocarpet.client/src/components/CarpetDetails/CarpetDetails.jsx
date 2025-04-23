@@ -1,38 +1,35 @@
 ﻿import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCart } from "../../utilities/hooks/useCart.jsx";
 
 function CarpetDetails() {
     const { id } = useParams();
     const [carpet, setCarpet] = useState(null);
     const navigate = useNavigate();
+    const { addItem, maxItems, cartItems } = useCart();
 
-    // environment variable
     const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchCarpetDetails = async () => {
             try {
                 const response = await fetch(`${apiUrl}/Carpet/${id}`);
-                if (!response.ok) {
-                    throw new Error("Carpet not found");
-                }
+                if (!response.ok) throw new Error("Carpet not found");
                 const data = await response.json();
                 setCarpet(data);
             } catch (error) {
                 console.error("Error fetching carpet details:", error);
             }
         };
-
         if (id) fetchCarpetDetails();
     }, [apiUrl, id]);
 
     const handleAddToCart = () => {
-        // Add carpet to cart logic (e.g., save to localStorage or make an API call)
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push(carpet);
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        // Navigate to the cart page
+        if (cartItems.length >= maxItems) {
+            alert("You cannot add more than 5 carpets to the cart.");
+            return;
+        }
+        addItem(carpet);
         navigate("/cart");
     };
 
@@ -57,6 +54,7 @@ function CarpetDetails() {
             <button
                 onClick={handleAddToCart}
                 className="mt-4 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                disabled={cartItems.length >= maxItems}
             >
                 Add to Cart
             </button>

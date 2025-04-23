@@ -1,70 +1,96 @@
-﻿import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-// this is just a sample page for backend testing
-// this is just a sample page for backend testing
-// this is just a sample page for backend testing
+﻿import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../utilities/hooks/useCart';
 
 const Cart = () => {
-    const [cartCount, setCartCount] = useState(0);
+    const { cartItems, addItem, removeItem, getSubscriptionId, maxItems, clearCart } = useCart();
+    const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const navigate = useNavigate();
-    const maxItems = 5;
-
-    const addItem = () => {
-        if (cartCount < maxItems) {
-            setCartCount(cartCount + 1);
-        }
-    };
-
-    const removeItem = () => {
-        if (cartCount > 0) {
-            setCartCount(cartCount - 1);
-        }
-    };
-
-    // Determine subscription based on cart count.
-    const getSubscriptionId = () => {
-        if (cartCount === 1) return 1;
-        if (cartCount === 2 || cartCount === 3) return 2;
-        if (cartCount === 4 || cartCount === 5) return 3;
-        return null;
-    };
 
     const handleCheckout = () => {
         const subscriptionID = getSubscriptionId();
-        if(subscriptionID === null){
+        if (subscriptionID === null) {
             alert("Please add at least one carpet to your cart.");
             return;
-        } 
-        else{
-            navigate(`/signup?subscriptionID=${subscriptionID}`);
         }
+        navigate(`/signup?subscriptionID=${subscriptionID}`);
+    };
+
+    const handleContinueShopping = () => {
+        navigate('/products');
     };
 
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
-            <div className="flex items-center space-x-4">
-                <button onClick={removeItem} className="bg-red-500 text-white px-4 py-2 rounded">−</button>
-                <span className="text-xl">{cartCount} {cartCount === 1 ? "item" : "items"}</span>
-                <button onClick={addItem} className="bg-green-500 text-white px-4 py-2 rounded">+</button>
+            {cartCount > 0 && (
+                <button
+                    onClick={clearCart}
+                    className="mb-4 bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                >
+                    Clear Cart
+                </button>
+            )}
+            <div className="mb-6">
+                {cartCount > 0 ? (
+                    <ul className="divide-y divide-gray-200">
+                        {cartItems.map((carpet, idx) => (
+                            <li key={`${carpet.carpetID}-${idx}`} className="flex items-center py-4">
+                                <img
+                                    src={carpet.imgName ? `/images/${carpet.imgName}.jpg` : '/images/placeholder.jpg'}
+                                    alt={carpet.name}
+                                    className="w-16 h-16 object-cover rounded mr-4"
+                                />
+                                <div className="flex-1">
+                                    <div className="font-semibold">{carpet.name}</div>
+                                    <div className="text-gray-600 text-sm">{carpet.material} | {carpet.color} | {carpet.dimensions}</div>
+                                    <div className="text-gray-500 text-xs">{carpet.descriptions}</div>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <button
+                                        onClick={() => removeItem(carpet.carpetID)}
+                                        className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                                    >−</button>
+                                    <span className="mx-2 text-lg">{carpet.quantity}</span>
+                                    <button
+                                        onClick={() => addItem(carpet)}
+                                        className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                                        disabled={cartCount >= maxItems}
+                                    >+</button>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="text-lg">Please add at least one carpet to your cart.</p>
+                )}
+            </div>
+            <div className="mt-4 flex flex-col sm:flex-row gap-4">
+                <button
+                    onClick={handleContinueShopping}
+                    className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded"
+                >
+                    Continue Shopping
+                </button>
+                <button
+                    onClick={handleCheckout}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded"
+                    disabled={cartCount === 0}
+                >
+                    Checkout
+                </button>
             </div>
             <div className="mt-4">
-                {cartCount > 0 ? (
+                {cartCount > 0 && (
                     <p className="text-lg">
                         Your selected subscription will be:{" "}
                         {(cartCount === 1 && "Gold") ||
                             ((cartCount === 2 || cartCount === 3) && "Diamond") ||
                             ((cartCount === 4 || cartCount === 5) && "Platinum")}
                     </p>
-                ) : (
-                    <p className="text-lg">Please add at least one carpet to your cart.</p>
                 )}
             </div>
-            <button onClick={handleCheckout} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded">
-                Checkout
-            </button>
         </div>
     );
-}
+};
+
 export default Cart;
