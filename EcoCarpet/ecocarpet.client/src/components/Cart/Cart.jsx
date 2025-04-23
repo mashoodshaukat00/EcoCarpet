@@ -2,6 +2,41 @@
 import { useCart } from '../../utilities/hooks/useCart';
 import useCartPageActions from '../../utilities/hooks/useCartPageActions';
 import { FaRegTrashAlt } from "react-icons/fa";
+import clsx from "clsx";
+
+const SUBSCRIPTIONS = [
+    {
+        id: 1,
+        name: "Gold",
+        description: "Best for 1 carpet. Basic subscription.",
+        range: [1],
+        color: "border-yellow-400 bg-yellow-50",
+        highlight: "border-yellow-500 shadow-yellow-200"
+    },
+    {
+        id: 2,
+        name: "Diamond",
+        description: "Best for 2-3 carpets. Premium subscription.",
+        range: [2, 3],
+        color: "border-blue-400 bg-blue-50",
+        highlight: "border-blue-500 shadow-blue-200"
+    },
+    {
+        id: 3,
+        name: "Platinum",
+        description: "Best for 4-5 carpets. Ultimate subscription.",
+        range: [4, 5],
+        color: "border-gray-400 bg-gray-50",
+        highlight: "border-gray-500 shadow-gray-200"
+    }
+];
+
+const getActiveSubscriptionId = (quantity) => {
+    if (quantity === 1) return 1;
+    if (quantity === 2 || quantity === 3) return 2;
+    if (quantity === 4 || quantity === 5) return 3;
+    return null;
+};
 
 const Cart = () => {
     const { cartItems, addItem, removeItem, getSubscriptionId, maxItems, clearCart } = useCart();
@@ -10,6 +45,7 @@ const Cart = () => {
 
     const { handleCheckout, handleContinueShopping, handleGoToProduct } = useCartPageActions(getSubscriptionId, navigate);
     const showAddOneMoreMsg = cartCount === 2 || cartCount === 4;
+    const activeSubId = getActiveSubscriptionId(cartCount);
 
     return (
         <div className="container mx-auto p-2 sm:p-4">
@@ -28,7 +64,7 @@ const Cart = () => {
             )}
             <div className="mb-6">
                 {cartCount > 0 ? (
-                    <ul className="flex flex-col gap-4">
+                    <ul className="flex flex-col sm:flex-col gap-4">
                         {cartItems.map((carpet, idx) => (
                             <li
                                 key={`${carpet.carpetID}-${idx}`}
@@ -77,6 +113,39 @@ const Cart = () => {
                     <p className="text-lg text-center">Please add at least one carpet to your cart.</p>
                 )}
             </div>
+            {/* Subscription Cards - only show if cartCount > 0 */}
+            {cartCount > 0 && (
+                <div className="mt-8 mb-4 flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    {SUBSCRIPTIONS.map(sub => (
+                        <div
+                            key={sub.id}
+                            className={clsx(
+                                "w-full sm:w-1/3 border-2 rounded-lg p-6 shadow transition-all duration-300",
+                                sub.color,
+                                activeSubId === sub.id
+                                    ? `scale-105 ring-2 ring-offset-2 ${sub.highlight} shadow-lg`
+                                    : "opacity-70"
+                            )}
+                            style={{ minWidth: 220, maxWidth: 340 }}
+                        >
+                            <div className="text-xl font-bold mb-2 text-center">{sub.name}</div>
+                            <div className="text-gray-700 text-center mb-2">{sub.description}</div>
+                            <div className="flex justify-center">
+                                <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-700">
+                                    {sub.range.length === 1
+                                        ? `For ${sub.range[0]} item`
+                                        : `For ${sub.range[0]}-${sub.range[1]} items`}
+                                </span>
+                            </div>
+                            {activeSubId === sub.id && (
+                                <div className="mt-4 text-center font-semibold text-green-700 animate-bounce">
+                                    Selected
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            )}
             {showAddOneMoreMsg && (
                 <div className="mb-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 rounded text-center font-medium">
                     You can add one more item to your cart at no additional cost.
@@ -96,16 +165,6 @@ const Cart = () => {
                 >
                     Checkout
                 </button>
-            </div>
-            <div className="mt-4 text-center">
-                {cartCount > 0 && (
-                    <p className="text-lg">
-                        Your selected subscription will be:{" "}
-                        {(cartCount === 1 && "Gold") ||
-                            ((cartCount === 2 || cartCount === 3) && "Diamond") ||
-                            ((cartCount === 4 || cartCount === 5) && "Platinum")}
-                    </p>
-                )}
             </div>
         </div>
     );
