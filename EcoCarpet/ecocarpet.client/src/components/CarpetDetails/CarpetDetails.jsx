@@ -1,28 +1,12 @@
-﻿import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+﻿import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../utilities/hooks/useCart.jsx";
+import useCarpetDetails from "../../utilities/hooks/useCarpetDetails";
 
 function CarpetDetails() {
     const { id } = useParams();
-    const [carpet, setCarpet] = useState(null);
     const navigate = useNavigate();
     const { addItem, maxItems, cartItems } = useCart();
-
-    const apiUrl = import.meta.env.VITE_API_URL;
-
-    useEffect(() => {
-        const fetchCarpetDetails = async () => {
-            try {
-                const response = await fetch(`${apiUrl}/Carpet/${id}`);
-                if (!response.ok) throw new Error("Carpet not found");
-                const data = await response.json();
-                setCarpet(data);
-            } catch (error) {
-                console.error("Error fetching carpet details:", error);
-            }
-        };
-        if (id) fetchCarpetDetails();
-    }, [apiUrl, id]);
+    const { carpet, loading, error } = useCarpetDetails(id);
 
     const handleAddToCart = () => {
         if (cartItems.length >= maxItems) {
@@ -33,8 +17,14 @@ function CarpetDetails() {
         navigate("/cart");
     };
 
-    if (!carpet) {
+    if (loading) {
         return <p className="text-center text-gray-600">Loading carpet details...</p>;
+    }
+    if (error) {
+        return <p className="text-center text-red-600">Error: {error}</p>;
+    }
+    if (!carpet) {
+        return null;
     }
 
     return (

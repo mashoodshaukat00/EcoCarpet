@@ -81,7 +81,7 @@ function Carousel() {
                               <p className="text-xl font-semibold cursor-pointer" onClick={() => navigate(`/products/${carpet.carpetID}`)}>{carpet.name}</p>
                               <p className="description flex-grow overflow-y-auto text-center max-h-[100px]">{carpet.descriptions}</p>
                                 <button onClick={() => navigate(`/products/${carpet.carpetID}`)}
-                                    className='bg-indigo-500 cursor-pointer text-white text-lg px-6 py-1 rounded-xl mt-2'>Read More</button>
+                                    className='bg-indigo-500 cursor-pointer text-white text-lg px-6 py-1 rounded-xl mt-2'>View Carpet</button>
                             </div>
                         </div>
                     ))}
