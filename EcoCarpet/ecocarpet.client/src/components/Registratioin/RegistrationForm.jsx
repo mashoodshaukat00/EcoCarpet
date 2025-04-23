@@ -1,8 +1,13 @@
 // src/components/RegistrationForm.jsx
 import useRegistrationForm from '../../utilities/hooks/useRegistrationForm';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
     const { formData, handleChange, handleSubmit } = useRegistrationForm();
+    const navigate = useNavigate();
+    const handleCheckout = () => {
+        navigate(`/CheckoutForm`);
+    };
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -146,7 +151,7 @@ const RegistrationForm = () => {
                     </div>
                      {/* Hidden Field for SubscriptionID (pre-populated) */}
                 <input type="hidden" onChange={handleChange} name="subscriptionID" value={formData.subscriptionID} />
-                    <button
+                    <button onClick={handleCheckout}
                         type="submit"
                         className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
                     >

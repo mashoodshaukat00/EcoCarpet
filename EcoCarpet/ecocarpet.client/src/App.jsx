@@ -11,6 +11,7 @@ import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 import CarpetDetails from './components/CarpetDetails/CarpetDetails';
 import CartPage from './components/CartPage/CartPage';
 import useAuth from './utilities/hooks/useAuth';
+import CheckoutForm from './components/CheckoutForm/CheckoutForm';
 
 function App() {
     const { isAuthenticated, handleLogin, handleLogout } = useAuth();
@@ -29,6 +30,7 @@ function App() {
                         <Route path="*" element={<NoPage />} />
                         <Route path="/products/:id" element={<CarpetDetails />} />
                         <Route path="/cart" element={<CartPage />} />
+                         <Route path="/CheckoutForm" element={<CheckoutForm />} />
                     </Routes>
                 </main>
                 <Footer />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 const useRegistrationForm = () => {
 
@@ -10,7 +10,7 @@ function useQuery() {
 
 const query = useQuery();
     const subscriptionIdFromQuery = query.get('subscriptionID');
-    
+    const navigate = useNavigate();   
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -51,6 +51,23 @@ const query = useQuery();
                 alert(`Registration failed: ${errorData.Title || 'Unknown error'}`);
                 return;
             }
+            // --- HINT: Store user data in local storage after successful registration ---
+            const userData = {
+                firstName: formData.FirstName,
+                lastName: formData.LastName,
+                email: formData.Email,
+                address: formData.Address,
+                city: formData.City,
+                postalCode: formData.PostalCode,
+                country: formData.Country,
+                phoneNumber: formData.PhoneNumber,
+                // Add other relevant data if needed
+            };
+            localStorage.setItem('registeredUserData', JSON.stringify(userData));
+
+            // --- HINT: Navigate to your checkout page after successful registration ---
+            navigate('/checkout'); // Replace '/checkout' with the actual path to your checkout page
+            console.log('Registration successful!'); // Optional success message
         } catch (error) {
             console.error('There was a problem with the registration:', error.message);
             alert('Failed to register. Please try again later.');
