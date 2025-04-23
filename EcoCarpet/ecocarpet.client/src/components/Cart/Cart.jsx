@@ -1,6 +1,7 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../utilities/hooks/useCart';
 import useCartPageActions from '../../utilities/hooks/useCartPageActions';
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const Cart = () => {
     const { cartItems, addItem, removeItem, getSubscriptionId, maxItems, clearCart } = useCart();
@@ -17,9 +18,11 @@ const Cart = () => {
                 <div className="flex justify-end">
                     <button
                         onClick={clearCart}
-                        className="mb-4 bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                        className="mb-4 bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 flex items-center gap-2"
+                        aria-label="Clear Cart"
                     >
-                        Clear Cart
+                        <FaRegTrashAlt className="text-lg" />
+                        <span className="sr-only">Clear Cart</span>
                     </button>
                 </div>
             )}
