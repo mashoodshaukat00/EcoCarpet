@@ -32,7 +32,7 @@ const Checkout = () => {
     if (!customer || subsLoading) {
         return (
             <div className="flex justify-center items-center min-h-[200px]">
-                <span className="text-blue-700 font-semibold">Loading checkout...</span>
+                <span className="text-blue-700 font-semibold">Loading checkout....</span>
             </div>
         );
     }
