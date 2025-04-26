@@ -12,6 +12,7 @@ import CarpetDetails from './components/CarpetDetails/CarpetDetails';
 import Cart from './components/Cart/Cart';
 import useAuth from './utilities/hooks/useAuth';
 import { CartProvider } from './utilities/hooks/useCart.jsx';
+import Checkout from './components/Checkout/Checkout';
 
 function App() {
     const { isAuthenticated, handleLogin, handleLogout } = useAuth();
@@ -31,6 +32,7 @@ function App() {
                             <Route path="*" element={<NoPage />} />
                             <Route path="/products/:id" element={<CarpetDetails />} />
                             <Route path="/cart" element={<Cart />} />
+                            <Route path="/checkout" element={<Checkout />} />
                         </Routes>
                     </main>
                     <Footer />

@@ -3,14 +3,14 @@ import { useLocation } from 'react-router-dom';
 
 const useRegistrationForm = () => {
 
-// Helper hook to parse query parameters.
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+    // Helper hook to parse query parameters.
+    function useQuery() {
+        return new URLSearchParams(useLocation().search);
+    }
 
-const query = useQuery();
+    const query = useQuery();
     const subscriptionIdFromQuery = query.get('subscriptionID');
-    
+
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -49,15 +49,25 @@ const query = useQuery();
             if (!response.ok) {
                 const errorData = await response.json();
                 alert(`Registration failed: ${errorData.Title || 'Unknown error'}`);
-                return;
+                return { success: false };
             }
+            // On success, return customer info for checkout
+            return { success: true, customer: formData };
         } catch (error) {
             console.error('There was a problem with the registration:', error.message);
             alert('Failed to register. Please try again later.');
+            return { success: false };
         }
     };
 
-    return { formData, handleChange, handleSubmit };
+    const handleSubmitWithCheckout = async (e, navigate) => {
+        const result = await handleSubmit(e);
+        if (result && result.success) {
+            navigate('/checkout', { state: { customer: result.customer } });
+        }
+    };
+
+    return { formData, handleChange, handleSubmit, handleSubmitWithCheckout };
 };
 
 export default useRegistrationForm;
