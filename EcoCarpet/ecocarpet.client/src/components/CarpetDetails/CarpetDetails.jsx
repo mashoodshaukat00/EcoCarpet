@@ -1,6 +1,7 @@
 ﻿import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../utilities/hooks/useCart.jsx";
 import useCarpetDetails from "../../utilities/hooks/useCarpetDetails";
+import Carousel from "../Carousel/Carousel";
 
 function CarpetDetails() {
     const { id } = useParams();
@@ -28,27 +29,39 @@ function CarpetDetails() {
     }
 
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-            <h1 className="text-2xl font-bold text-gray-800">{carpet.name}</h1>
-            <img
-                src={`/images/${carpet.imgName}.jpg`}
-                alt={carpet.name}
-                className="w-full h-64 object-cover mt-4 rounded-lg"
-            />
-            <p className="text-gray-700 mt-2"><strong>Material:</strong> {carpet.material}</p>
-            <p className="text-gray-700"><strong>Color:</strong> {carpet.color}</p>
-            <p className="text-gray-700"><strong>Description:</strong> {carpet.descriptions}</p>
-            <p className="text-gray-700"><strong>Available Stock:</strong> {carpet.availableStock}</p>
-            <p className="text-gray-700"><strong>Dimensions:</strong> {carpet.dimensions}</p>
-            <p className="text-gray-700"><strong>Carpet Id:</strong> {carpet.carpetID}</p>
-            <button
-                onClick={handleAddToCart}
-                className="mt-4 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
-                disabled={cartItems.length >= maxItems}
-            >
-                Add to Cart
-            </button>
-        </div>
+        <>
+            <div className="max-w-7xl mx-auto p-6 mt-10 flex flex-col md:flex-row items-center bg-transparent shadow-none rounded-none">
+                <div className="flex-1 flex justify-center items-center md:mr-20 mb-8 md:mb-0">
+                    <img
+                        src={`/images/${carpet.imgName}.jpg`}
+                        alt={carpet.name}
+                        className="w-full max-w-lg h-[28rem] object-contain"
+                    />
+                </div>
+                <div className="flex-1 flex flex-col justify-center">
+                    <h1 className="text-3xl font-extrabold text-emerald-800 mb-4 tracking-tight">{carpet.name}</h1>
+                    <div className="space-y-2 text-gray-700 text-lg">
+                        <div><span className="font-semibold">Material:</span> {carpet.material}</div>
+                        <div><span className="font-semibold">Color:</span> {carpet.color}</div>
+                        <div><span className="font-semibold">Description:</span> {carpet.descriptions}</div>
+                        <div><span className="font-semibold">Available Stock:</span> {carpet.availableStock}</div>
+                        <div><span className="font-semibold">Dimensions:</span> {carpet.dimensions}</div>
+                        <div><span className="font-semibold">Carpet Id:</span> {carpet.carpetID}</div>
+                    </div>
+                    <button
+                        onClick={handleAddToCart}
+                        className="mt-6 w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-emerald-700 transition text-lg"
+                        disabled={cartItems.length >= maxItems}
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div className="py-10 mt-6 bg-gray-100">
+                <h1 className="text-3xl font-extrabold text-emerald-800 text-center">Related Products</h1>
+                <Carousel />
+            </div>
+        </>
     );
 }
 
