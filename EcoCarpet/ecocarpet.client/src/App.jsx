@@ -13,6 +13,8 @@ import Cart from './components/Cart/Cart';
 import useAuth from './utilities/hooks/useAuth';
 import { CartProvider } from './utilities/hooks/useCart.jsx';
 import Checkout from './components/Checkout/Checkout';
+import Payment from './components/Payment/Payment';
+import Success from './components/Success/Success';
 
 function App() {
     const { isAuthenticated, handleLogin, handleLogout } = useAuth();
@@ -33,6 +35,8 @@ function App() {
                             <Route path="/products/:id" element={<CarpetDetails />} />
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/checkout" element={<Checkout />} />
+                            <Route path="/payment" element={<Payment />} />
+                            <Route path="/success" element={<Success />} />
                         </Routes>
                     </main>
                     <Footer />
@@ -41,5 +45,4 @@ function App() {
         </CartProvider>
     );   
 }
-
 export default App;
