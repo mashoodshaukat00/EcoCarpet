@@ -1,5 +1,5 @@
 import { useCart } from '../../utilities/hooks/useCart';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useSubscriptions from '../../utilities/hooks/useSubscriptions';
 
@@ -126,12 +126,13 @@ const Checkout = () => {
             </div>
             {/* Place Order Button */}
             <div className="flex justify-end mt-6">
-                <button
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow transition"
-                    onClick={() => alert("Order placed! (implement order logic here)")}
+                <Link
+                    to="/payment"
+                    state={{ customer, subscription }}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow transition text-center"
                 >
-                    Place Order
-                </button>
+                    Proceed to Payment
+                </Link>
             </div>
         </div>
     );
