@@ -27,9 +27,8 @@ const Nav = ({ isAuthenticated, onLogout }) => {
     }, [showDropdown]);
 
     return (
-        <header className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 text-white shadow">
+        <header className="sticky top-0 z-50 bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 text-white shadow">
             <nav className="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
-                {/* Logo */}
                 <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
                     <EcoCarpetLogo />
                     <span className="text-2xl font-extrabold tracking-wide text-white select-none">EcoCarpet</span>
@@ -59,7 +58,7 @@ const Nav = ({ isAuthenticated, onLogout }) => {
                                     <FaUserCircle className="text-2xl" />
                                 </button>
                                 {showDropdown && (
-                                    <div className="absolute right-0 mt-2 w-40 bg-white text-gray-800 rounded-lg shadow-lg z-50 py-2">
+                                    <div className="absolute right-0 mt-4 w-40 bg-white text-gray-800 rounded-lg shadow-lg z-50 py-2">
                                         <Link
                                             to="/profile"
                                             className="block px-4 py-2 hover:bg-emerald-100 transition"

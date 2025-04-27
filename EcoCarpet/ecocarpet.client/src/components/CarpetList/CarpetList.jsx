@@ -41,10 +41,9 @@ function CarpetList() {
     }, [apiUrl]);
 
     useEffect(() => {
-        fetchCarpets(); // Initial fetch with no filters
+        fetchCarpets();
     }, [fetchCarpets]);
 
-    // Show/hide filter state
     const [showFilters, setShowFilters] = useState(false);
 
     return (
