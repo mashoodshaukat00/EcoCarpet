@@ -44,11 +44,25 @@ function CarpetList() {
         fetchCarpets(); // Initial fetch with no filters
     }, [fetchCarpets]);
 
+    // Show/hide filter state
+    const [showFilters, setShowFilters] = useState(false);
+
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold text-center mb-4">Carpet List</h1>
+            <h1 className="text-2xl font-bold text-center mb-4 text-emerald-800">Carpet List</h1>
             
-            <Filter apiUrl={apiUrl} onFilterChange={fetchCarpets} />
+            <div className="flex justify-center mb-6">
+                <button
+                    onClick={() => setShowFilters((prev) => !prev)}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full shadow font-semibold transition duration-300"
+                >
+                    {showFilters ? 'Hide Filters' : 'Show Filters'}
+                </button>
+            </div>
+
+            {showFilters && (
+                <Filter apiUrl={apiUrl} onFilterChange={fetchCarpets} />
+            )}
 
             {/* Carpet Grid */}
             {loading && <p className="text-center">Loading carpets...</p>}
