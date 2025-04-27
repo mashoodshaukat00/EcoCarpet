@@ -116,10 +116,9 @@ const Cart = () => {
                         ))}
                     </ul>
                 ) : (
-                    <p className="text-lg text-center">Please add at least one carpet to your cart.</p>
+                    <p className="text-lg text-center">Your cart is empty</p>
                 )}
             </div>
-            {/* Subscription Cards - only show if cartCount > 0 */}
             {cartCount > 0 && (
                 <div className="mt-8 mb-4 flex flex-col sm:flex-row gap-6 justify-center items-center">
                     {SUBSCRIPTIONS.map(sub => (

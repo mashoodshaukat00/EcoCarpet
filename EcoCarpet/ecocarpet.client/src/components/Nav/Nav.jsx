@@ -3,17 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { useCart } from "../../utilities/hooks/useCart";
+import EcoCarpetLogo from "./EcoCarpetLogo";
 
 const Nav = ({ isAuthenticated, onLogout }) => {
     const navigate = useNavigate();
     const { cartItems } = useCart();
     const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-    // Dropdown state for profile menu
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef(null);
 
-    // Close dropdown on outside click
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,12 +31,10 @@ const Nav = ({ isAuthenticated, onLogout }) => {
             <nav className="max-w-7xl mx-auto flex justify-between items-center py-3 px-4">
                 {/* Logo */}
                 <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
-                    <img src="/src/assets/logo.png" alt="EcoCarpet Logo" className="h-10 w-10 mr-2 drop-shadow-lg" />
+                    <EcoCarpetLogo />
                     <span className="text-2xl font-extrabold tracking-wide text-white select-none">EcoCarpet</span>
                 </div>
-                {/* Right Side Icons */}
                 <div className="flex items-center gap-6">
-                    {/* Cart Icon with badge */}
                     <button
                         className="relative"
                         onClick={() => navigate("/cart")}
@@ -71,7 +67,6 @@ const Nav = ({ isAuthenticated, onLogout }) => {
                                         >
                                             Profile
                                         </Link>
-                                        {/* Move navigation logic here instead of Logout component */}
                                         <button
                                             className="block w-full text-left px-4 py-2 hover:bg-emerald-100 transition"
                                             onClick={() => {
@@ -79,7 +74,7 @@ const Nav = ({ isAuthenticated, onLogout }) => {
                                                 onLogout();
                                                 setTimeout(() => {
                                                     navigate("/", { state: { loggedOut: true } });
-                                                }, 100); // Short delay to allow logout state update
+                                                }, 100);
                                             }}
                                         >
                                             Logout
