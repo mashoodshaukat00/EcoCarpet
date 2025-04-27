@@ -52,6 +52,28 @@ const Home = () => {
                 <h1 className="text-3xl font-extrabold text-emerald-800 text-center mb-8 tracking-tight">Our Rugs</h1>
                 <Carousel />
             </div>
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 bg-white rounded-2xl shadow-xl border border-emerald-100 p-8 mb-12">
+                <div className="flex-1 flex justify-center items-center mb-8 md:mb-0">
+                    <img
+                        src="/public/images/rug_collection.jpg"
+                        alt="EcoCarpet Sample"
+                        className="w-full max-w-md h-72 object-cover rounded-xl border-2 border-emerald-200 shadow"
+                    />
+                </div>
+                <div className="flex-1 flex flex-col justify-center">
+                    <h2 className="text-2xl font-bold text-emerald-800 mb-4">Why Choose Our Carpets?</h2>
+                    <ul className="list-disc pl-6 text-gray-700 space-y-2 text-lg">
+                        <li>Made from sustainable and eco-friendly materials</li>
+                        <li>Durable, stylish, and easy to maintain</li>
+                        <li>Available in a variety of colors and sizes to fit any home</li>
+                        <li>Flexible subscription plans for hassle-free replacements</li>
+                        <li>Perfect for families, pets, and high-traffic areas</li>
+                    </ul>
+                    <p className="mt-6 text-gray-600">
+                        Discover the perfect blend of comfort, style, and sustainability with EcoCarpet. Our carpets are designed to enhance your living space while caring for the planet.
+                    </p>
+                </div>
+            </div>
         </div>
     );
 };
