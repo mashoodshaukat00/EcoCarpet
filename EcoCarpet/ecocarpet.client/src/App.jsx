@@ -15,6 +15,7 @@ import { CartProvider } from './utilities/hooks/useCart.jsx';
 import Checkout from './components/Checkout/Checkout';
 import Payment from './components/Payment/Payment';
 import Success from './components/Success/Success';
+import About from './components/About/About';
 
 function App() {
     const { isAuthenticated, handleLogin, handleLogout } = useAuth();
@@ -37,6 +38,7 @@ function App() {
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/payment" element={<Payment />} />
                             <Route path="/success" element={<Success />} />
+                            <Route path="/about" element={<About />} />
                         </Routes>
                     </main>
                     <Footer />

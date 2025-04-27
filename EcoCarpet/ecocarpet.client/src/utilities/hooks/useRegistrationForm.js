@@ -65,6 +65,7 @@ const useRegistrationForm = () => {
         if (result && result.success) {
             navigate('/checkout', { state: { customer: result.customer } });
         }
+        return result;
     };
 
     return { formData, handleChange, handleSubmit, handleSubmitWithCheckout };

@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import usePaymentForm from "../../utilities/hooks/usePaymentForm";
+import { useCart } from "../../utilities/hooks/useCart";
 
 const Payment = () => {
     const navigate = useNavigate();
-    const { card, error, handleChange, handleSubmit } = usePaymentForm(navigate);
+    const { clearCart } = useCart();
+    const { card, error, handleChange, handleSubmit } = usePaymentForm(() => {
+        clearCart();
+        navigate("/success");
+    });
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-10">

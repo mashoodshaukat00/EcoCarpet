@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+.testing {
+    @apply bg-yellow-500;
+}
