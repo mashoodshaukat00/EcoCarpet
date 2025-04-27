@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const usePaymentForm = (navigate) => {
+const usePaymentForm = (onSuccess) => {
     const [card, setCard] = useState({
         name: "",
         number: "",
@@ -42,7 +42,7 @@ const usePaymentForm = (navigate) => {
         e.preventDefault();
         if (validateCard()) {
             setTimeout(() => {
-                navigate("/success");
+                if (onSuccess) onSuccess();
             }, 800);
         }
     };
