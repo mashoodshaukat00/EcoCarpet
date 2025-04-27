@@ -6,7 +6,6 @@ import Footer from './components/Footer/Footer';
 import RegistrationForm from './components/Registratioin/RegistrationForm';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home';
-import NoPage from './components/NoPage/NoPage';
 import SubscriptionPage from './components/Subscriptions/SubscriptionPage';
 import CarpetDetails from './components/CarpetDetails/CarpetDetails';
 import Cart from './components/Cart/Cart';
@@ -32,7 +31,6 @@ function App() {
                             <Route path="/signup" element={<RegistrationForm />} />
                             <Route path="/products" element={<CarpetList />} />
                             <Route path="/subscriptions" element={<SubscriptionPage />} />
-                            <Route path="*" element={<NoPage />} />
                             <Route path="/products/:id" element={<CarpetDetails />} />
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/checkout" element={<Checkout />} />
