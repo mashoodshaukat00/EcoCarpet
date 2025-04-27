@@ -41,12 +41,12 @@ function CarpetDetails() {
                 <div className="flex-1 flex flex-col justify-center">
                     <h1 className="text-3xl font-extrabold text-emerald-800 mb-4 tracking-tight">{carpet.name}</h1>
                     <div className="space-y-2 text-gray-700 text-lg">
-                        <div><span className="font-semibold">Material:</span> {carpet.material}</div>
-                        <div><span className="font-semibold">Color:</span> {carpet.color}</div>
-                        <div><span className="font-semibold">Description:</span> {carpet.descriptions}</div>
-                        <div><span className="font-semibold">Available Stock:</span> {carpet.availableStock}</div>
-                        <div><span className="font-semibold">Dimensions:</span> {carpet.dimensions}</div>
-                        <div><span className="font-semibold">Carpet Id:</span> {carpet.carpetID}</div>
+                        <div><span className="font-semibold text-emerald-700">Material:</span> {carpet.material}</div>
+                        <div><span className="font-semibold text-emerald-700">Color:</span> {carpet.color}</div>
+                        <div><span className="font-semibold text-emerald-700">Description:</span> {carpet.descriptions}</div>
+                        <div><span className="font-semibold text-emerald-700">Available Stock:</span> {carpet.availableStock}</div>
+                        <div><span className="font-semibold text-emerald-700">Dimensions:</span> {carpet.dimensions}</div>
+                        <div><span className="font-semibold text-emerald-700">Carpet Id:</span> {carpet.carpetID}</div>
                     </div>
                     <button
                         onClick={handleAddToCart}

@@ -5,24 +5,31 @@ const Carpet = ({ carpet }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img
-                src={`/images/${carpet.imgName}.jpg`}
-                alt={carpet.name}
-                className="w-full h-40 object-cover cursor-pointer"
+        <div className="bg-white rounded-2xl shadow-xl border border-emerald-100 overflow-hidden flex flex-col hover:shadow-emerald-200 transition-shadow duration-300">
+            <div
+                className="h-48 bg-emerald-50 flex items-center justify-center cursor-pointer overflow-hidden"
                 onClick={() => navigate(`/products/${carpet.carpetID}`)}
-            />
-            <div className="p-4">
-                <h3 className="text-lg font-semibold cursor-pointer" onClick={() => navigate(`/products/${carpet.carpetID}`)}>{carpet.name}</h3>
-                <p className="text-gray-600">{carpet.descriptions}</p>
-                <div className="mt-4">
-                    <button
-                        onClick={() => navigate(`/products/${carpet.carpetID}`)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full cursor-pointer"
-                    >
-                        View Product
-                    </button>
-                </div>
+            >
+                <img
+                    src={`/images/${carpet.imgName}.jpg`}
+                    alt={carpet.name}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+            </div>
+            <div className="p-5 flex flex-col flex-1">
+                <h3
+                    className="text-xl font-bold text-emerald-800 mb-2 cursor-pointer hover:underline text-center"
+                    onClick={() => navigate(`/products/${carpet.carpetID}`)}
+                >
+                    {carpet.name}
+                </h3>
+                <p className="text-gray-600 text-center text-sm flex-grow">{carpet.descriptions}</p>
+                <button
+                    onClick={() => navigate(`/products/${carpet.carpetID}`)}
+                    className="mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition w-full shadow"
+                >
+                    View Product
+                </button>
             </div>
         </div>
     );
