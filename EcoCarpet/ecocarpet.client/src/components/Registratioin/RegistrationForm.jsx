@@ -1,16 +1,26 @@
 // src/components/RegistrationForm.jsx
 import useRegistrationForm from '../../utilities/hooks/useRegistrationForm';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../utilities/hooks/useAuth';
 
 const RegistrationForm = () => {
     const { formData, handleChange, handleSubmitWithCheckout } = useRegistrationForm();
     const navigate = useNavigate();
+    const { handleLogin } = useAuth();
+
+    // Wrap the original handleSubmitWithCheckout to also log in the user
+    const handleSubmitAndLogin = async (e) => {
+        const result = await handleSubmitWithCheckout(e, navigate);
+        if (result && result.success) {
+            handleLogin();
+        }
+    };
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
                 <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Register</h2>
-                <form onSubmit={(e) => handleSubmitWithCheckout(e, navigate)} className="space-y-4">
+                <form onSubmit={handleSubmitAndLogin} className="space-y-4">
                     <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
                             First Name

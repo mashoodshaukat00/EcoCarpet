@@ -161,15 +161,16 @@ const Cart = () => {
                     onClick={handleContinueShopping}
                     className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded w-full sm:w-auto transition"
                 >
-                    Continue Shopping
+                    {cartCount > 0 ? "Continue Shopping" : "Go to Shopping"}
                 </button>
-                <button
-                    onClick={handleCheckout}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded w-full sm:w-auto transition"
-                    disabled={cartCount === 0}
-                >
-                    Checkout
-                </button>
+                {cartCount > 0 && (
+                    <button
+                        onClick={handleCheckout}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded w-full sm:w-auto transition"
+                    >
+                        Checkout
+                    </button>
+                )}
             </div>
         </div>
     );
