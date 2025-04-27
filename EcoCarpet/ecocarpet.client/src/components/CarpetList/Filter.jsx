@@ -12,8 +12,6 @@ const Filter = ({ apiUrl, onFilterChange }) => {
     const [dimensionOptions, setDimensionOptions] = useState([]);
     const [statuses, setStatuses] = useState([]);
 
-    const [showFilters, setShowFilters] = useState(false);
-
     useEffect(() => {
         const fetchFilterOptions = async () => {
             try {
@@ -48,18 +46,7 @@ const Filter = ({ apiUrl, onFilterChange }) => {
 
     return (
         <div className="bg-gradient-to-br from-emerald-50 via-emerald-100 to-white p-8 rounded-2xl shadow-xl border border-emerald-100">
-            {/* Toggle Button for Filters (Visible only on small screens) */}
-            <div className="flex justify-center mb-6 md:hidden">
-                <button
-                    onClick={() => setShowFilters(!showFilters)}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full shadow-md font-semibold transition duration-300"
-                >
-                    {showFilters ? 'Hide Filters' : 'Show Filters'}
-                </button>
-            </div>
-
-            {/* Filter Section (Always visible on medium and larger screens) */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 ${showFilters ? '' : 'hidden md:grid'}`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6`}>
                 <div className="flex flex-col">
                     <label className="block text-sm font-bold text-emerald-800 mb-2">Material</label>
                     <select

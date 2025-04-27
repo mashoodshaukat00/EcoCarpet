@@ -49,14 +49,17 @@ function CarpetList() {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold text-center mb-4 text-emerald-800">Carpet List</h1>
+            <h1 className="text-2xl font-bold text-center mb-4 text-emerald-800">Our Carpets Collection</h1>
             
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-end mb-6">
                 <button
                     onClick={() => setShowFilters((prev) => !prev)}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full shadow font-semibold transition duration-300"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full shadow font-semibold transition duration-300 flex items-center gap-2"
+                    aria-label={showFilters ? "Hide Filters" : "Show Filters"}
                 >
-                    {showFilters ? 'Hide Filters' : 'Show Filters'}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M6 12h12M10 18h4" />
+                    </svg>
                 </button>
             </div>
 
