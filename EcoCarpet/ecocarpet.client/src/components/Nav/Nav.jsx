@@ -34,6 +34,12 @@ const Nav = ({ isAuthenticated, onLogout }) => {
                     <span className="text-2xl font-extrabold tracking-wide text-white select-none">EcoCarpet</span>
                 </div>
                 <div className="flex items-center gap-6">
+                    <Link
+                        to="/subscriptions"
+                        className="text-lg font-semibold hover:text-emerald-300 transition"
+                    >
+                        Subscriptions
+                    </Link>
                     <button
                         className="relative"
                         onClick={() => navigate("/cart")}
